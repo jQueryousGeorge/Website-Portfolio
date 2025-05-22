@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.desktop {
+    background-color: $desktop-teal;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
