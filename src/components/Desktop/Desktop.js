@@ -8,3 +8,5 @@ const Desktop = () => {
         </div>
     );
 };
+
+export default Desktop;
