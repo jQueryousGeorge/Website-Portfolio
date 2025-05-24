@@ -1,10 +1,11 @@
 import React from 'react';
 import './Desktop.scss';
+import Taskbar from '../Taskbar/Taskbar';
 
 const Desktop = () => {
     return (
         <div className='desktop'>
-            {/* { Desktop items will go here} */}
+            <Taskbar />
         </div>
     );
 };
