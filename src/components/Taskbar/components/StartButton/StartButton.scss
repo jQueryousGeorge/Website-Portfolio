@@ -1,0 +1,25 @@
+@import '../../../../styles/variables';
+
+.start-button {
+    width: 54px;
+    height: 22px;
+    background: $button-face; // #c0c0c0
+    // border: 2px outset $button-face;
+    display: flex;
+    align-items: center;
+    // padding: 2px 4px;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    
+    &:active {
+        border: 2px inset $button-face;
+    }
+    
+    .start-icon {
+        width: 54px;
+        height: 22px;
+        margin-right: 2px;
+    }
+    
+}
