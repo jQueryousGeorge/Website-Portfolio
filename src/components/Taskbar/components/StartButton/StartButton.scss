@@ -34,37 +34,14 @@
 }
 
 .windows-logo {
-    width: 16px;
-    height: 14px;
-    display: grid;
-    grid-template-columns: 7px 7px;
-    grid-template-rows: 6px 6px;
-    gap: 2px;
-    margin-left: 2px;
-}
-
-.pane {
-    width: 100%;
-    height: 100%;
-    
-    &.red {
-        background-color: #ff0000;
-    }
-    
-    &.green {
-        background-color: #00ff00;
-    }
-    
-    &.blue {
-        background-color: #0000ff;
-    }
-    
-    &.yellow {
-        background-color: #ffff00;
-    }
+  width: 50px;
+  height: 20px;
+  margin-right: 4px;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 .start-text {
     font-weight: bold;
-    margin-left: 3px;
+    margin-left: -3px;
 }

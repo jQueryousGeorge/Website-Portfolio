@@ -1,15 +1,11 @@
 import React from "react";
 import "./StartButton.scss";
+import windows95Logo from "../../../../assets/images/windows-95-logo.png";
 
 const StartButton = () => {
   return (
     <button className="start-button">
-      <div className="windows-logo">
-        <div className="pane red"></div>
-        <div className="pane green"></div>
-        <div className="pane blue"></div>
-        <div className="pane yellow"></div>
-      </div>
+      <img src={windows95Logo} alt="Windows 95 Logo" className="windows-logo" />
       <span className="start-text">Start</span>
     </button>
   );
