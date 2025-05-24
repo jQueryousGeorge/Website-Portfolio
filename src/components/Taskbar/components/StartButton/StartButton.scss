@@ -1,7 +1,7 @@
 @import '../../../../styles/variables';
 
 .start-button {
-    width: 54px;  // Standard Windows 95 Start button width
+    width: 54px;
     height: 22px; // Should match taskbar height minus borders
     background-color: #c0c0c0;
     
@@ -31,4 +31,40 @@
         padding-top: 1px; // Slight content shift
         padding-left: 1px;
     }
+}
+
+.windows-logo {
+    width: 16px;
+    height: 14px;
+    display: grid;
+    grid-template-columns: 7px 7px;
+    grid-template-rows: 6px 6px;
+    gap: 2px;
+    margin-left: 2px;
+}
+
+.pane {
+    width: 100%;
+    height: 100%;
+    
+    &.red {
+        background-color: #ff0000;
+    }
+    
+    &.green {
+        background-color: #00ff00;
+    }
+    
+    &.blue {
+        background-color: #0000ff;
+    }
+    
+    &.yellow {
+        background-color: #ffff00;
+    }
+}
+
+.start-text {
+    font-weight: bold;
+    margin-left: 3px;
 }
