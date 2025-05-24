@@ -1,16 +1,17 @@
 import React from "react";
-// import "../../Taskbar.scss";
 import "./StartButton.scss";
 
 const StartButton = () => {
   return (
-    <div className="startbutton-left">
-      <div className="startbutton-button">
-        <button className="start-button">
-          <img src="/start-icon.jpg" alt="" className="start-icon" />
-        </button>
+    <button className="start-button">
+      <div className="windows-logo">
+        <div className="window-pane top-left"></div>
+        <div className="window-pane top-right"></div>
+        <div className="window-pane bottom-left"></div>
+        <div className="window-pane bottom-right"></div>
       </div>
-    </div>
+      <span className="start-text">Start</span>
+    </button>
   );
 };
 
