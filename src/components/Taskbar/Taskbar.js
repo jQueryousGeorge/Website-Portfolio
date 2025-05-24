@@ -1,16 +1,21 @@
 import React from "react";
-import './Taskbar.scss';
-import StartButton from './Components/StartButton/StartButton';
-import SystemTray from './components/SystemTray/SystemTray';
+import "./Taskbar.scss";
+import StartButton from "./Components/StartButton/StartButton";
+import SystemTray from "./components/SystemTray/SystemTray";
 
 const Taskbar = () => {
     return (
-        <div className="taskbar">
-            <StartButton />
-            <div className="taskabr_tasks">
-                {/* Open apps will pop-up here on the Taskbar */}
+        <div className="taskbar-bottom">
+            {/* Main taskbar div - entire taskbar, used to position it at bottom */}
+            
+            <div 
+                className="taskbar-startbutton">
+                <StartButton />
             </div>
-            <SystemTray />
+
+            <div className="taskabr-systemtray">
+                <SystemTray />
+            </div>
         </div>
     );
 };
