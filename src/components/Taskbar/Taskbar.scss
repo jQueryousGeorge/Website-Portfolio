@@ -12,3 +12,11 @@
     // 3D raised effect
     border-top: 2px solid $button-highlight;
 }
+
+.taskbar-systemtray {
+    margin-left: auto; // Put the system tray (clock) to the right
+    padding-right: 2px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
