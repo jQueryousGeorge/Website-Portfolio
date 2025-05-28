@@ -6,3 +6,15 @@
     padding-right: 2px;
     height: 100%;
 }
+
+.tray-clock {
+    font-family: "MS Sans Serif", sans-serif;
+    font-size: 11px;
+    padding: 0 6px;
+    height: 20px; // Slightly less than taskbar height for recessed look
+    line-height: 20px; // Center text vertically
+    border: 1px solid;
+    border-color: $button-shadow $button-highlight $button-highlight $button-shadow; // 3D recessed effect
+    box-shadow: inset 1px 1px $button-dark-shadow;
+    margin-left: 6px; // Space from other tray icons (if any in future)
+}
