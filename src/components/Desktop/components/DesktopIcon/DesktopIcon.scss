@@ -1,0 +1,49 @@
+@import '../../../../styles/_variables.scss';
+
+.desktop-icon {
+    width: 75px; // Typical width for an icon cell
+    height: 75px; // Typical height
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; // Align items to the top of the cell
+    padding: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin: 5px; // Spacing between icons
+
+    .icon-image {
+        width: 32px; // Standard Win95 icon size
+        height: 32px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px; // For emoji placeholder
+        background-color: #fff; // For a white box for the icon
+        border: 1px solid $button-shadow; // Example border
+    }
+
+    .icon-label {
+        font-family: "MS Sans Serif", sans-serif;
+        font-size: 11px;
+        color: white; // Desktop icon labels are typically white
+        background-color: transparent; // Usually transparent background
+        padding: 1px 3px;
+        text-shadow: 1px 1px 1px $desktop-background; // For a slight shadow based on background
+    }
+
+    &:hover {
+    background-color: rgba(0, 120, 215, 0.1); // Light blue background
+    border: 1px solid rgba(0, 120, 215, 0.3);
+    border-radius: 2px;
+    }
+
+    // Future: selected state styling
+    // &.selected .icon-label {
+    //   background-color: $highlight-blue;
+    //   color: white;
+    //   // Add border around label for selection
+    //   border: 1px dotted $button-highlight; // Or a specific selection color
+    // }
+}

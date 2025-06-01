@@ -1,5 +1,9 @@
 import React from 'react';
 import './Desktop.scss';
+import DesktopIcon from './components/DesktopIcon/DesktopIcon';
+import AboutMe from '../portfolio_sections/AboutMe';
+import Projects from '../portfolio_sections/Projects';
+import Contact from '../portfolio_sections/Contact';
 
 const initialDesktopIcons = [
     { id: 'my-computer', label: 'My Computer', windowId: 'myComputerWindow', contentType: 'text', content: 'Contents of My Computer' },
@@ -13,7 +17,14 @@ const initialDesktopIcons = [
 const Desktop = () => {
     return (
         <div className='desktop'>
-            {/*  */}
+            <div className='desktop-icons-container'>
+                {initialDesktopIcons.map(icon => (
+                    <DesktopIcon
+                        key={icon.id}
+                        label={icon.label}
+                    />    
+                ))}
+            </div>
         </div>
     );
 };
