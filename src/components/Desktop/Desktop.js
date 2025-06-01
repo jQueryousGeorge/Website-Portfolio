@@ -1,6 +1,5 @@
 import React from 'react';
 import './Desktop.scss';
-import Taskbar from '../Taskbar/Taskbar';
 
 const initialDesktopIcons = [
     { id: 'my-computer', label: 'My Computer', windowId: 'myComputerWindow', contentType: 'text', content: 'Contents of My Computer' },
@@ -14,7 +13,7 @@ const initialDesktopIcons = [
 const Desktop = () => {
     return (
         <div className='desktop'>
-            <Taskbar />
+            {/*  */}
         </div>
     );
 };
