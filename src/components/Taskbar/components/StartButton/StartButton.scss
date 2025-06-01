@@ -1,11 +1,11 @@
-@import 'src/styles/variables';
+@import '../../../../styles/variables';
 
 .start-button {
     width: 54px;
     height: 22px; // Should match taskbar height minus borders
     background-color: #c0c0c0;
     
-    // Classic 3D raised effect (this is key!)
+    // Classic 3D raised effect
     border-top: 2px solid #ffffff;
     border-left: 2px solid #ffffff;
     border-bottom: 2px solid #808080;
