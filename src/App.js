@@ -11,11 +11,25 @@ function App() {
   // Function called when an icon is being double-clicked
   const handleOpenWindow = (windowData) => {
     console.log('Opening window:', windowData);
-  }
+
+    setOpenWindows(prev => ({
+      ...prev,
+      [windowData.id]: {
+        isOpen: true,
+        title: windowData.title,
+        contentType: windowData.contentType,
+        contentPayload: windowData.contentPayload
+      }
+    }));
+    setActiveWindowId(windowData.id);
+  };
 
   return (
     <div className='App'>
-      <Desktop />
+      <Desktop
+        onOpenWindow={handleOpenWindow}
+        openWindows={openWindows}
+      />
       <Taskbar />
     </div>
   );
