@@ -22,6 +22,7 @@ function App() {
         contentPayload: windowData.contentPayload
       }
     }));
+    // New window is set as active
     setActiveWindowId(windowData.id);
   };
 
