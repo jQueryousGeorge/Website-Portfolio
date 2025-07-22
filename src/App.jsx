@@ -13,6 +13,7 @@ function App() {
     console.log('Opening window:', windowData);
 
     setOpenWindows(prev => ({
+      // Prev is the previous state of openWindows (an object)
       ...prev,
       [windowData.id]: {
         isOpen: true,
