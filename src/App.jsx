@@ -12,6 +12,8 @@ function App() {
   const handleOpenWindow = (windowData) => {
     console.log('Opening window:', windowData);
 
+    // `setOpenWindows` is the function component of `usestate()`
+    // used to update the state of the `openWindows` obj.
     setOpenWindows(prev => ({
       // Prev is the previous state of openWindows (an object)
       ...prev,
