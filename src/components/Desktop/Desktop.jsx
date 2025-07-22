@@ -15,6 +15,19 @@ const initialDesktopIcons = [
 ];
 
 const Desktop = () => {
+    const handleIconDoubleClick = (label) => {
+        const icon = initialDesktopIcons.find(icon => icon.label === label);
+    
+        if (icon) {
+            console.log(`Opening window for ${label}`);
+            // Here you would typically trigger the opening of a window
+            // For example, you might call a function passed down from App.jsx
+            // to open the corresponding window with its content.
+        } else {
+            console.warn(`No icon found for label: ${label}`);
+        }
+    };
+
     return (
         <div className='desktop'>
             <div className='desktop-icons-container'>
@@ -22,6 +35,7 @@ const Desktop = () => {
                     <DesktopIcon
                         key={icon.id}
                         label={icon.label}
+                        onDoubleClick={handleIconDoubleClick}
                     />    
                 ))}
             </div>
