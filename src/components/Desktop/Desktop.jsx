@@ -15,7 +15,7 @@ const initialDesktopIcons = [
 ];
 
 const Desktop = () => {
-    const handleIconDoubleClick = (label) => {
+    const handleDoubleClick = (label) => {
         const icon = initialDesktopIcons.find(icon => icon.label === label);
     
         if (icon) {
@@ -35,7 +35,7 @@ const Desktop = () => {
                     <DesktopIcon
                         key={icon.id}
                         label={icon.label}
-                        onDoubleClick={handleIconDoubleClick}
+                        onDoubleClick={() => handleDoubleClick(icon.label)}
                     />    
                 ))}
             </div>

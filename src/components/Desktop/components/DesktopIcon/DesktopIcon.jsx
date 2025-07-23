@@ -1,6 +1,4 @@
-import React from 'react';
 import './DesktopIcon.scss';
-import Desktop from '../../Desktop';
 // I'm currently testing to see if writing the function in Desktop will pass the prop to DesktopIcon.
 
 // Placeholder for a generic icon image if no specific one is provided
@@ -9,15 +7,8 @@ import Desktop from '../../Desktop';
 const DefaultIcon = () => <span className="icon-placeholder">📄</span>; // Simple document emoji
 
 const DesktopIcon = ({ label, onDoubleClick }) => {
-    // const handleDoubleClick = () => {
-    //     // console.log(`Icon "${label}" double-clicked`);
-    //     if (onDoubleClick) {
-    //         onDoubleClick(label);
-    //     }
-    // };
-
     return (
-        <div className="desktop-icon" onDoubleClick={handleDoubleClick}>
+        <div className="desktop-icon" onDoubleClick={onDoubleClick}>
             <div className="icon-image">
                 {/* In future, this could be <img src={icon} alt={label} /> */}
                 <DefaultIcon />
