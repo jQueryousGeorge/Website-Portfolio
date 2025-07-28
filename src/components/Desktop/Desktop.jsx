@@ -20,8 +20,8 @@ const Desktop = () => {
     
         if (icon) {
             console.log(`Opening window for ${label}`);
-            // Here you would typically trigger the opening of a window
-            // For example, you might call a function passed down from App.jsx
+            // Here we would typically trigger the opening of a window
+            // For example,  calling a function passed down from App.jsx
             // to open the corresponding window with its content.
         } else {
             console.warn(`No icon found for label: ${label}`);
