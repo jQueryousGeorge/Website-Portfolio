@@ -1,10 +1,32 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Window.scss";
 
-const Window = ({ title, isOpen }) => {
-    if (!isOpen) {
-        return null;
+const Window = ({ 
+    children,
+    title = 'Untitled',
+    isActive = false,
+    onClose,
+    onFocus,
+    noMinimize,
+    defaultPosition = { x: 100, y: 100 },
+    width = 400,
+    height = 300,
+    isMinimized = false
+}) => {
+    const [position, setPosition] = useState(defaultPosition);
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+    const [isMaximized, setIsMaximized] = useState(false);
+    const windowRef = useRef(null);
+    const titleBarRef = useRef(null);
+
+    // Handle window focus when clicked
+    const handleFocus = (e) => {
+        if (onFocus) onFocus();
+        e.stopPropagation();
+
     }
+    
 
     return (
         <div className="window">
