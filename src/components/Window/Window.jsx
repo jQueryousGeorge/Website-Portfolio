@@ -38,7 +38,12 @@ const Window = ({
             x: e.clientX - rect.left,
             y: e.clientY - rect.top
         });
-    }
+
+        setIsDragging(true);
+        if (onFocus) onFocus();
+        e.stopPropagation();
+
+    };
     
 
     return (
