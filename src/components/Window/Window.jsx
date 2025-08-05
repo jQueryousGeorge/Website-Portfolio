@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Window.scss";
 
 const Window = ({ title, isOpen }) => {
