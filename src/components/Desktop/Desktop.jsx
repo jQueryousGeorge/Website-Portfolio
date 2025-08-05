@@ -56,18 +56,19 @@ const initialDesktopIcons = [
 ];
 
 const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, activeWindowId }) => {
-    const handleDoubleClick = (label) => {
-        const icon = initialDesktopIcons.find(icon => icon.label === label);
+    const handleDoubleClick = (icon) => {
+        onOpenWindow({
+            id: icon.windowId,
+            title: icon.label,
+            contentType: icon.contentType,
+            content: icon.content,
+            contentComponent: icon.contentComponent,
+            defaultPosition: icon.defaultPosition,
+            width: icon.width || 400,
+            height: icon.height || 300
+        });
+    }
     
-        if (icon) {
-            console.log(`Opening window for ${label}`);
-            // Here we would typically trigger the opening of a window
-            // For example,  calling a function passed down from App.jsx
-            // to open the corresponding window with its content.
-        } else {
-            console.warn(`No icon found for label: ${label}`);
-        }
-    };
 
     return (
         <div className='desktop'>
@@ -76,10 +77,44 @@ const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, acti
                     <DesktopIcon
                         key={icon.id}
                         label={icon.label}
-                        onDoubleClick={() => handleDoubleClick(icon.label)}
+                        onDoubleClick={() => handleDoubleClick(icon)}
                     />    
                 ))}
             </div>
+
+            {Object.entries(openWindows).map(([id, windowData]) => {
+                const window = windowData.windowData || {};
+                const state = windowData.state || {};
+
+                return (
+                    <Window
+                        key={id}
+                        isActive={activeWindowId === id}
+                        isMinimized={state.isMinimized}
+                        title={window.title}
+
+                        onClose={() => {
+                            onCloseWindow(id)
+                        }}
+
+                        onFocus={() => {
+                            onWindowFocus(id)
+                        }}
+
+                        onMinimize={() => {
+                            onMinimizeWindow(id, !state.isMinimized)
+                        }}
+
+                        defaultPosition={state.position || window.defaultPosition}
+                        width={window.width}
+                        height={window.height}
+                    >
+                        {window.contentType === 'component' ? window.contentComponent ? <window.contentComponent /> : <div>Component not found</div> : <div className='window-content'>{window.content}</div>
+                        }
+                    </Window>
+
+                );
+            })}
         </div>
     );
 };
