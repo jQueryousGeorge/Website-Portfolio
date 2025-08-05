@@ -7,12 +7,52 @@ import Projects from '../portfolio_sections/Projects';
 import Contact from '../portfolio_sections/Contact';
 
 const initialDesktopIcons = [
-    { id: 'my-computer', label: 'My Computer', windowId: 'myComputerWindow', contentType: 'text', content: 'Contents of My Computer' },
-    { id: 'recycle-bin', label: 'Recycle Bin', windowId: 'recycleBinWindow', contentType: 'text', content: 'Contents of Recycle Bin' },
-    { id: 'documents', label: 'My Documents', windowId: 'myDocumentsWindow', contentType: 'text', content: 'Contents of My Documents' },
-    { id: 'about-me', label: 'About Me', windowId: 'aboutMeWindow', contentType: 'component', contentComponent: AboutMe },
-    { id: 'projects', label: 'Projects', windowId: 'projectsWindow', contentType: 'component', contentComponent: Projects },
-    { id: 'contact', label: 'Contact', windowId: 'contactWindow', contentType: 'component', contentComponent: Contact }
+    { 
+        id: 'my-computer', 
+        label: 'My Computer', 
+        windowId: 'myComputerWindow', 
+        contentType: 'text', 
+        content: 'My Computer Contents',
+        defaultPosition: { x: 100, y: 100 }
+    },
+    { 
+        id: 'recycle-bin', 
+        label: 'Recycle Bin', 
+        windowId: 'recycleBinWindow', 
+        contentType: 'text', 
+        content: 'Recycle Bin is empty',
+        defaultPosition: { x: 100, y: 200 }
+    },
+    { 
+        id: 'about-me', 
+        label: 'About Me', 
+        windowId: 'aboutMeWindow', 
+        contentType: 'component', 
+        contentComponent: AboutMe,
+        defaultPosition: { x: 100, y: 300 },
+        width: 500,
+        height: 400
+    },
+    { 
+        id: 'projects', 
+        label: 'Projects', 
+        windowId: 'projectsWindow', 
+        contentType: 'component', 
+        contentComponent: Projects,
+        defaultPosition: { x: 150, y: 150 },
+        width: 600,
+        height: 500
+    },
+    { 
+        id: 'contact', 
+        label: 'Contact', 
+        windowId: 'contactWindow', 
+        contentType: 'component', 
+        contentComponent: Contact,
+        defaultPosition: { x: 200, y: 200 },
+        width: 500,
+        height: 400
+    }
 ];
 
 const Desktop = () => {
