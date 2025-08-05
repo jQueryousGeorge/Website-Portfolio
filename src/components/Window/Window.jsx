@@ -26,6 +26,19 @@ const Window = ({
         e.stopPropagation();
 
     }
+
+    // Window dragging logic
+    const handleMouseDown = (e) => {
+        // Set up the left mouse to be the only btn to be used to drag a window:
+        if (e.button !== 0) return;
+        if (e.target !== titleBarRef.current && !titleBarRef.current.contains(e.target)) return;
+
+        const rect = windowRef.current.getBoundingClientRect();
+        setDragOffset( {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        });
+    }
     
 
     return (
