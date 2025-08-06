@@ -1,7 +1,7 @@
 import React from 'react';
 import './Desktop.scss';
 import DesktopIcon from './components/DesktopIcon/DesktopIcon';
-import Window from '../Window/Window';
+import Window from '../../Window/Window';
 import AboutMe from '../portfolio_sections/AboutMe';
 import Projects from '../portfolio_sections/Projects';
 import Contact from '../portfolio_sections/Contact';
@@ -56,7 +56,7 @@ const initialDesktopIcons = [
 ];
 
 const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, activeWindowId }) => {
-    const handleDoubleClick = (icon) => {
+    const handleIconDoubleClick = (icon) => {
         onOpenWindow({
             id: icon.windowId,
             title: icon.label,
@@ -67,8 +67,7 @@ const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, acti
             width: icon.width || 400,
             height: icon.height || 300
         });
-    }
-    
+    };
 
     return (
         <div className='desktop'>
@@ -77,42 +76,35 @@ const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, acti
                     <DesktopIcon
                         key={icon.id}
                         label={icon.label}
-                        onDoubleClick={() => handleDoubleClick(icon)}
+                        onDoubleClick={() => handleIconDoubleClick(icon)}
                     />    
                 ))}
             </div>
-
+            
             {Object.entries(openWindows).map(([id, windowData]) => {
                 const window = windowData.windowData || {};
                 const state = windowData.state || {};
-
+                
                 return (
                     <Window
                         key={id}
                         isActive={activeWindowId === id}
                         isMinimized={state.isMinimized}
                         title={window.title}
-
-                        onClose={() => {
-                            onCloseWindow(id)
-                        }}
-
-                        onFocus={() => {
-                            onWindowFocus(id)
-                        }}
-
-                        onMinimize={() => {
-                            onMinimizeWindow(id, !state.isMinimized)
-                        }}
-
+                        onClose={() => onCloseWindow(id)}
+                        onFocus={() => onWindowFocus(id)}
+                        onMinimize={() => onMinimizeWindow(id, !state.isMinimized)}
                         defaultPosition={state.position || window.defaultPosition}
                         width={window.width}
                         height={window.height}
                     >
-                        {window.contentType === 'component' ? window.contentComponent ? <window.contentComponent /> : <div>Component not found</div> : <div className='window-content'>{window.content}</div>
+                        {window.contentType === 'component' ? 
+                            window.contentComponent ? 
+                                <window.contentComponent /> : 
+                                <div>Component not found</div> :
+                            <div className="window-content">{window.content}</div>
                         }
                     </Window>
-
                 );
             })}
         </div>
