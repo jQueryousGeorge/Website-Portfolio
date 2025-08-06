@@ -1,7 +1,7 @@
 import React from 'react';
 import './Desktop.scss';
 import DesktopIcon from './components/DesktopIcon/DesktopIcon';
-import Window from '../../Window/Window';
+import Window from '../Window/Window';
 import AboutMe from '../portfolio_sections/AboutMe';
 import Projects from '../portfolio_sections/Projects';
 import Contact from '../portfolio_sections/Contact';
