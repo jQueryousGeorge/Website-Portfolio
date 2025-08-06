@@ -20,15 +20,29 @@ const Taskbar = ({ openWindows = {}, onWindowFocus, onMinimizeWindow, activeWind
 
     return (
         <div className="taskbar-bottom">
-            {/* Main taskbar div - entire taskbar, used to position it at bottom */}
-
-            <div
-                className="taskbar-startbutton">
+            <div className="taskbar-startbutton">
                 <StartButton />
+            </div>
+
+            <div className="taskbar-windows">
+                {Object.entries(openWindows).map(([id, window]) => (
+                    <button
+                        key={id}
+                        className={`taskbar-window-button ${activeWindowId === id ? 'active' : ''} ${window.isMinimized ? 'minimized' : ''}`}
+                        onClick={() => handleTaskbarButtonClick(id)}
+                        title={window.title}
+                    >
+                        <span className="window-icon">📄</span>
+                        <span className="window-title">{window.title}</span>
+                    </button>
+                ))}
             </div>
 
             <div className="taskbar-systemtray">
                 <SystemTray />
+                <div className="taskbar-clock">
+                    {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </div>
             </div>
         </div>
     );
