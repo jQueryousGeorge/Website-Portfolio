@@ -1,0 +1,248 @@
+@import '../../styles/windows95.scss';
+
+.window {
+    position: absolute;
+    background-color: #c0c0c0;
+    border: 2px solid #ffffff;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    box-shadow: 1px 1px 0 0 #000000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 11px;
+    resize: both;
+    min-width: 150px;
+    min-height: 100px;
+    box-sizing: border-box;
+    user-select: none;
+    
+    &.active {
+        border-color: #000080;
+        box-shadow: 1px 1px 0 0 #000000, 0 0 0 1px #000080;
+    }
+    
+    // Windows 95 style resize handle
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 12px;
+        height: 12px;
+        background: 
+            linear-gradient(135deg, 
+                #c0c0c0 0%, 
+                #c0c0c0 50%, 
+                #000000 50%, 
+                #000000 100%
+            );
+        cursor: nwse-resize;
+        z-index: 10;
+    }
+}
+
+.title-bar {
+    height: 18px;
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 4px 2px 6px;
+    cursor: move;
+    user-select: none;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid #ffffff;
+    position: relative;
+    
+    // Windows 95 title bar pattern overlay
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23ffffff' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+        pointer-events: none;
+    }
+    
+    .window:not(.active) & {
+        background: #808080;
+        color: #c0c0c0;
+    }
+}
+
+.title-bar-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 10px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    position: relative;
+    
+    .window:not(.active) & {
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.title-bar-controls {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    height: 100%;
+}
+
+.title-bar-button {
+    width: 16px;
+    height: 14px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    background-color: #c0c0c0;
+    border: 1px solid #ffffff;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 8px;
+    line-height: 1;
+    color: black;
+    transition: none;
+    outline: none;
+    
+    // Windows 95 button pressed effect
+    &:active {
+        border: 1px solid #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
+        padding: 1px 0 0 1px;
+        
+        &::before {
+            transform: translate(1px, 1px);
+        }
+    }
+    
+    // Windows 95 button hover effect
+    &:hover {
+        background-color: #e0e0e0;
+    }
+    
+    // Icons for the buttons
+    &::before {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: #000000;
+        mask-size: contain;
+        mask-position: center;
+        mask-repeat: no-repeat;
+        transition: transform 0.1s;
+    }
+    
+    &.minimize-button::before {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect width='8' height='1' x='1' y='7' fill='%23000'/%3E%3C/svg%3E");
+    }
+    
+    &.maximize-button::before {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect width='8' height='8' x='1' y='1' fill='%23000' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
+    }
+    
+    &.restore-button::before {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M3,3v4h4v-4h-4z M8,8h-7v-7h2v-1h-3v9h8v-3h-1v2z M7,4h-3v3h3v-3z' fill='%23000'/%3E%3C/svg%3E");
+    }
+    
+    &.close-button::before {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2,2l6,6m0-6l-6,6' stroke='%23000' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
+    }
+}
+
+.window-content {
+    flex: 1;
+    padding: 8px;
+    overflow: auto;
+    background-color: #c0c0c0;
+    border: 1px solid #ffffff;
+    border-top-color: #808080;
+    border-left-color: #808080;
+    margin: 0 2px 2px 2px;
+    box-sizing: border-box;
+    position: relative;
+    
+    // Windows 95 content background pattern
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 0h1v1H4V0zm0 2h1v1H4V2zm0 2h1v1H4V4zM2 4h1v1H2V4zm0-4h1v1H2V0zm0 2h1v1H2V2zm0 2h1v1H2V4zm0 2h1v1H2V6zM0 2h1v1H0V2zm0 4h1v1H0V6zm0-2h1v1H0V4zm0-2h1v1H0V2zm8 4h1v1H8V6zm0-2h1v1H8V4zm0-2h1v1H8V2zM6 0h1v1H6V0zm0 4h1v1H6V4z' fill='%23000000' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    // Make sure content is above the pattern
+    & > * {
+        position: relative;
+        z-index: 1;
+    }
+    
+    // Scrollbar styling for Windows 95 look
+    &::-webkit-scrollbar {
+        width: 16px;
+        height: 16px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #c0c0c0;
+        border: 1px solid #ffffff;
+        border-top-color: #808080;
+        border-left-color: #808080;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border: 1px solid #ffffff;
+        border-right-color: #808080;
+        border-bottom-color: #808080;
+    }
+    
+    &::-webkit-scrollbar-button {
+        background-color: #c0c0c0;
+        border: 1px solid #ffffff;
+        border-right-color: #808080;
+        border-bottom-color: #808080;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 8px 8px;
+    }
+    
+    &::-webkit-scrollbar-button:vertical:start {
+        background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6l4-4 4 4z' fill='%23000'/%3E%3C/svg%3E");
+    }
+    
+    &::-webkit-scrollbar-button:vertical:end {
+        background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 2l4 4 4-4z' fill='%23000'/%3E%3C/svg%3E");
+    }
+    
+    &::-webkit-scrollbar-button:horizontal:start {
+        background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 0L2 4l4 4z' fill='%23000'/%3E%3C/svg%3E");
+    }
+    
+    &::-webkit-scrollbar-button:horizontal:end {
+        background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 0v8l4-4z' fill='%23000'/%3E%3C/svg%3E");
+    }
+}

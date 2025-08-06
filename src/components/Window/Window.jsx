@@ -28,9 +28,9 @@ const Window = ({
 
     // Handle window dragging
     const handleMouseDown = (e) => {
-        if (e.button !== 0) return; // Only left mouse button counts
+        if (e.button !== 0) return; // Only left mouse button
         if (e.target !== titleBarRef.current && !titleBarRef.current.contains(e.target)) return;
-
+        
         const rect = windowRef.current.getBoundingClientRect();
         setDragOffset({
             x: e.clientX - rect.left,
@@ -41,13 +41,13 @@ const Window = ({
         e.stopPropagation();
     };
 
-    // Handle window movement while dragging
+    // Handle window movement
     useEffect(() => {
         if (!isDragging) return;
 
         const handleMouseMove = (e) => {
             if (!isDragging) return;
-
+            
             setPosition({
                 x: e.clientX - dragOffset.x,
                 y: e.clientY - dragOffset.y
@@ -83,13 +83,13 @@ const Window = ({
     };
 
     return (
-        <div
+        <div 
             className={`window ${isActive ? 'active' : ''}`}
             style={windowStyle}
             ref={windowRef}
             onClick={handleFocus}
         >
-            <div
+            <div 
                 className="title-bar"
                 onMouseDown={handleMouseDown}
                 onDoubleClick={handleTitleBarDoubleClick}
@@ -97,22 +97,22 @@ const Window = ({
             >
                 <div className="title-bar-text">{title}</div>
                 <div className="title-bar-controls">
-                    <button
-                        aria-label="Minimize"
+                    <button 
+                        aria-label="Minimize" 
                         className="title-bar-button minimize-button"
                         onClick={(e) => {
                             e.stopPropagation();
                             if (onMinimize) onMinimize();
                         }}
                     />
-                    <button
-                        aria-label={isMaximized ? 'Restore' : 'Maximize'}
+                    <button 
+                        aria-label={isMaximized ? 'Restore' : 'Maximize'} 
                         className={`title-bar-button ${isMaximized ? 'restore-button' : 'maximize-button'}`}
                         onClick={(e) => {
                             e.stopPropagation();
                             const newMaximized = !isMaximized;
                             setIsMaximized(newMaximized);
-
+                            
                             // If maximizing, store the previous position and size
                             if (newMaximized) {
                                 setPosition({
@@ -124,8 +124,8 @@ const Window = ({
                             }
                         }}
                     />
-                    <button
-                        aria-label="Close"
+                    <button 
+                        aria-label="Close" 
                         className="title-bar-button close-button"
                         onClick={(e) => {
                             e.stopPropagation();
