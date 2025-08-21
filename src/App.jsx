@@ -4,46 +4,48 @@ import Desktop from './components/Desktop/Desktop';
 import Taskbar from './components/Taskbar/Taskbar';
 
 function App() {
-  // Window management state
+  // Window management state - simplified structure
   const [openWindows, setOpenWindows] = useState({});
   const [activeWindowId, setActiveWindowId] = useState(null);
+  const [nextZIndex, setNextZIndex] = useState(1);
 
   // Open a new window or focus an existing one
   const handleOpenWindow = useCallback((windowData) => {
     setOpenWindows(prev => {
-      const newWindows = { ...prev };
-      
       // If window already exists, just focus it
-      if (newWindows[windowData.id]) {
+      if (prev[windowData.id]) {
         return {
-          ...newWindows,
+          ...prev,
           [windowData.id]: {
-            ...newWindows[windowData.id],
-            state: {
-              ...newWindows[windowData.id].state,
-              isMinimized: false
-            }
+            ...prev[windowData.id],
+            isMinimized: false
           }
         };
       }
       
       // Otherwise create a new window
+      const newZIndex = nextZIndex;
+      setNextZIndex(newZIndex + 1);
+      
       return {
-        ...newWindows,
+        ...prev,
         [windowData.id]: {
-          windowData: windowData,
-          state: {
-            isOpen: true,
-            isMinimized: false,
-            position: windowData.defaultPosition || { x: 100, y: 100 },
-            zIndex: Object.keys(newWindows).length + 1
-          }
+          id: windowData.id,
+          title: windowData.title,
+          contentType: windowData.contentType,
+          content: windowData.content,
+          contentComponent: windowData.contentComponent,
+          position: windowData.defaultPosition || { x: 100, y: 100 },
+          width: windowData.width || 400,
+          height: windowData.height || 300,
+          isMinimized: false,
+          zIndex: newZIndex
         }
       };
     });
     
     setActiveWindowId(windowData.id);
-  }, []);
+  }, [nextZIndex]);
 
   // Close a window
   const handleCloseWindow = useCallback((windowId) => {
@@ -64,6 +66,9 @@ function App() {
   const handleWindowFocus = useCallback((windowId) => {
     if (activeWindowId === windowId) return;
     
+    const newZIndex = nextZIndex;
+    setNextZIndex(newZIndex + 1);
+    
     setOpenWindows(prev => {
       if (!prev[windowId]) return prev;
       
@@ -71,16 +76,13 @@ function App() {
         ...prev,
         [windowId]: {
           ...prev[windowId],
-          state: {
-            ...prev[windowId].state,
-            zIndex: Object.keys(prev).length + 1
-          }
+          zIndex: newZIndex
         }
       };
     });
     
     setActiveWindowId(windowId);
-  }, [activeWindowId]);
+  }, [activeWindowId, nextZIndex]);
 
   // Minimize/Restore a window
   const handleMinimizeWindow = useCallback((windowId, isMinimized) => {
@@ -91,27 +93,27 @@ function App() {
         ...prev,
         [windowId]: {
           ...prev[windowId],
-          state: {
-            ...prev[windowId].state,
-            isMinimized
-          }
+          isMinimized
         }
       };
     });
     
     // If minimizing the active window, find the next window to focus
     if (isMinimized && activeWindowId === windowId) {
-      const windowIds = Object.keys(openWindows);
-      const currentIndex = windowIds.indexOf(windowId);
-      const nextIndex = currentIndex > 0 ? currentIndex - 1 : currentIndex + 1;
+      const visibleWindows = Object.entries(openWindows)
+        .filter(([id, window]) => id !== windowId && !window.isMinimized)
+        .sort((a, b) => b[1].zIndex - a[1].zIndex);
       
-      if (windowIds[nextIndex] && windowIds[nextIndex] !== windowId) {
-        setActiveWindowId(windowIds[nextIndex]);
+      if (visibleWindows.length > 0) {
+        setActiveWindowId(visibleWindows[0][0]);
       } else {
         setActiveWindowId(null);
       }
+    } else if (!isMinimized) {
+      // When restoring, make it active
+      handleWindowFocus(windowId);
     }
-  }, [activeWindowId, openWindows]);
+  }, [activeWindowId, openWindows, handleWindowFocus]);
 
   return (
     <div className='App'>
@@ -120,10 +122,12 @@ function App() {
         onOpenWindow={handleOpenWindow}
         onCloseWindow={handleCloseWindow}
         onWindowFocus={handleWindowFocus}
+        onMinimizeWindow={handleMinimizeWindow}
         activeWindowId={activeWindowId}
       />
       <Taskbar 
         openWindows={openWindows}
+        onOpenWindow={handleOpenWindow}
         onWindowFocus={handleWindowFocus}
         onMinimizeWindow={handleMinimizeWindow}
         activeWindowId={activeWindowId}

@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Taskbar.scss";
 import StartButton from "./components/StartButton/StartButton";
+import StartMenu from "./components/StartMenu/StartMenu";
 import SystemTray from "./components/SystemTray/SystemTray";
 
-const Taskbar = ({ openWindows = {}, onWindowFocus, onMinimizeWindow, activeWindowId }) => {
+const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWindow, activeWindowId }) => {
+    const [startMenuOpen, setStartMenuOpen] = useState(false);
+    
     const handleTaskbarButtonClick = (windowId) => {
         const window = openWindows[windowId];
-        if (window.state.isMinimized) {
+        if (window.isMinimized) {
             // Restore window if minimized
             onMinimizeWindow(windowId, false);
         } else if (activeWindowId === windowId) {
@@ -18,33 +21,45 @@ const Taskbar = ({ openWindows = {}, onWindowFocus, onMinimizeWindow, activeWind
         }
     };
 
+    const handleStartButtonClick = () => {
+        setStartMenuOpen(!startMenuOpen);
+    };
+
     return (
-        <div className="taskbar-bottom">
-            <div className="taskbar-startbutton">
-                <StartButton />
-            </div>
+        <>
+            <StartMenu 
+                isOpen={startMenuOpen}
+                onClose={() => setStartMenuOpen(false)}
+                onOpenWindow={(windowData) => {
+                    onOpenWindow(windowData);
+                    setStartMenuOpen(false);
+                }}
+            />
+            
+            <div className="taskbar-bottom">
+                <div className="taskbar-startbutton">
+                    <StartButton onClick={handleStartButtonClick} isActive={startMenuOpen} />
+                </div>
 
-            <div className="taskbar-windows">
-                {Object.entries(openWindows).map(([id, window]) => (
-                    <button
-                        key={id}
-                        className={`taskbar-window-button ${activeWindowId === id ? 'active' : ''} ${window.isMinimized ? 'minimized' : ''}`}
-                        onClick={() => handleTaskbarButtonClick(id)}
-                        title={window.title}
-                    >
-                        <span className="window-icon">📄</span>
-                        <span className="window-title">{window.title}</span>
-                    </button>
-                ))}
-            </div>
+                <div className="taskbar-windows">
+                    {Object.entries(openWindows).map(([id, window]) => (
+                        <button
+                            key={id}
+                            className={`taskbar-window-button ${activeWindowId === id ? 'active' : ''} ${window.isMinimized ? 'minimized' : ''}`}
+                            onClick={() => handleTaskbarButtonClick(id)}
+                            title={window.title}
+                        >
+                            <span className="window-icon">📄</span>
+                            <span className="window-title">{window.title}</span>
+                        </button>
+                    ))}
+                </div>
 
-            <div className="taskbar-systemtray">
-                <SystemTray />
-                <div className="taskbar-clock">
-                    {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                <div className="taskbar-systemtray">
+                    <SystemTray />
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

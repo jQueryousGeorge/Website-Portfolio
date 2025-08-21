@@ -1,6 +1,4 @@
-@import 'src/styles/_variables.scss';
-
-// @import '../../styles/windows95.scss';
+@import '../../styles/variables';
 
 .taskbar-bottom {
     position: fixed;
@@ -22,13 +20,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 8px;
-    border-right: 1px solid #808080;
-    background-color: #c0c0c0;
-    
-    &:active {
-        background-color: #b0b0b0;
-    }
+    padding: 0 2px;
 }
 
 .taskbar-windows {
@@ -39,6 +31,7 @@
     overflow-y: hidden;
     flex-grow: 1;
     padding: 2px 0;
+    gap: 2px;
     
     &::-webkit-scrollbar {
         height: 4px;
@@ -54,43 +47,47 @@
     display: flex;
     align-items: center;
     height: 22px;
-    margin: 0 2px;
+    min-width: 140px;
+    max-width: 200px;
     padding: 0 8px;
     background-color: #c0c0c0;
-    border: 1px solid #ffffff;
+    border: 2px solid;
+    border-left-color: #ffffff;
+    border-top-color: #ffffff;
     border-right-color: #808080;
     border-bottom-color: #808080;
     cursor: pointer;
     white-space: nowrap;
     font-family: 'MS Sans Serif', sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     
     &:hover {
         background-color: #e0e0e0;
     }
     
     &:active, &.active {
-        background-color: #c0c0c0;
-        border: 1px solid #808080;
+        background-color: #dfdfdf;
+        border-left-color: #808080;
+        border-top-color: #808080;
         border-right-color: #ffffff;
         border-bottom-color: #ffffff;
         padding: 1px 7px 0 9px; // Adjust for the pressed-in look
     }
     
-    &.minimized {
+    &.minimized:not(.active) {
         background-color: #c0c0c0;
-        border: 1px solid #808080;
-        border-right-color: #ffffff;
-        border-bottom-color: #ffffff;
-        opacity: 0.8;
+        border-left-color: #ffffff;
+        border-top-color: #ffffff;
+        border-right-color: #808080;
+        border-bottom-color: #808080;
     }
     
     .window-icon {
         margin-right: 4px;
+        font-size: 14px;
     }
     
     .window-title {
-        max-width: 150px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -103,22 +100,30 @@
     padding: 0 4px;
     margin-left: auto;
     background-color: #c0c0c0;
-    border-left: 1px solid #ffffff;
-    border-right: 1px solid #808080;
-}
-
-.taskbar-clock {
-    padding: 0 6px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 60px;
-    background-color: #c0c0c0;
-    border-left: 1px solid #808080;
-    border-top: 1px solid #808080;
-    border-right: 1px solid #ffffff;
-    border-bottom: 1px solid #ffffff;
-    margin-left: 4px;
-    font-size: 11px;
+    border-left: 2px solid;
+    border-left-color: #808080;
+    
+    .system-tray-right {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    
+    .tray-clock {
+        padding: 0 6px;
+        height: 20px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 70px;
+        background-color: #c0c0c0;
+        border: 2px solid;
+        border-left-color: #808080;
+        border-top-color: #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
+        font-size: 11px;
+        font-family: 'MS Sans Serif', sans-serif;
+    }
 }
