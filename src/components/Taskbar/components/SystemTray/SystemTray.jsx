@@ -13,7 +13,7 @@ const SystemTray = () => {
             hours = hours % 12;
             hours = hours ? hours : 12; // The hour '0' should be '12' am.
             const minuteStr = minutes < 10 ? '0' + minutes : minutes;
-            setCurrentTime(`${hours}: ${minuteStr} ${ampm}`);
+            setCurrentTime(`${hours}:${minuteStr} ${ampm}`);
         };
 
         updateTime();

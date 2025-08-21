@@ -6,7 +6,7 @@ import SystemTray from "./components/SystemTray/SystemTray";
 const Taskbar = ({ openWindows = {}, onWindowFocus, onMinimizeWindow, activeWindowId }) => {
     const handleTaskbarButtonClick = (windowId) => {
         const window = openWindows[windowId];
-        if (window.isMinimized) {
+        if (window.state.isMinimized) {
             // Restore window if minimized
             onMinimizeWindow(windowId, false);
         } else if (activeWindowId === windowId) {
