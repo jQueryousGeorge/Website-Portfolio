@@ -2,15 +2,15 @@
 
 .start-button {
     width: 54px;
-    height: 22px; // Should match taskbar height minus borders
+    height: 22px;
     background-color: #c0c0c0;
     
     // Classic 3D raised effect
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-bottom: 2px solid #808080;
-    border-right: 2px solid #808080;
-    border-style: solid;
+    border: 2px solid;
+    border-left-color: #ffffff;
+    border-top-color: #ffffff;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
     
     padding: 0 2px;
     font-family: "MS Sans Serif", sans-serif;
@@ -22,26 +22,33 @@
     align-items: center;
     gap: 2px;
     
-    &:active {
+    &:active, &.active {
         // Invert the borders for "pressed" effect
-        border-top: 2px solid #808080;
-        border-left: 2px solid #808080;
-        border-bottom: 2px solid #ffffff;
-        border-right: 2px solid #ffffff;
+        border-left-color: #808080;
+        border-top-color: #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
         padding-top: 1px; // Slight content shift
         padding-left: 1px;
+    }
+    
+    &:focus {
+        outline: 1px dotted #000000;
+        outline-offset: -4px;
     }
 }
 
 .windows-logo {
-  width: 50px;
-  height: 20px;
-  margin-right: 4px;
+  width: 16px;
+  height: 14px;
+  margin-right: 2px;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  object-fit: contain;
 }
 
 .start-text {
     font-weight: bold;
-    margin-left: -3px;
+    font-size: 11px;
 }

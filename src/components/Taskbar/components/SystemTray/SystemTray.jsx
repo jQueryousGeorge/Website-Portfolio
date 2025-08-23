@@ -26,7 +26,7 @@ const SystemTray = () => {
 
 
     return (
-        <div className="systemtray-right">
+        <div className="system-tray-right">
             <div className="tray-clock">
                 {currentTime}
             </div>

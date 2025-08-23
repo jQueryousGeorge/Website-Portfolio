@@ -1,0 +1,62 @@
+// Windows 95 base styles
+@import './variables';
+
+// Windows 95 Font Stack
+@font-face {
+  font-family: 'MS Sans Serif';
+  src: local('MS Sans Serif'), local('Microsoft Sans Serif'), 
+       local('-apple-system'), local('BlinkMacSystemFont'),
+       local('Segoe UI'), local('Arial'), sans-serif;
+}
+
+// Base Windows 95 styling mixins
+@mixin win95-border-outset {
+  border-style: solid;
+  border-width: 2px;
+  border-left-color: $button-highlight;
+  border-top-color: $button-highlight;
+  border-right-color: $button-dark-shadow;
+  border-bottom-color: $button-dark-shadow;
+}
+
+@mixin win95-border-inset {
+  border-style: solid;
+  border-width: 2px;
+  border-left-color: $button-dark-shadow;
+  border-top-color: $button-dark-shadow;
+  border-right-color: $button-highlight;
+  border-bottom-color: $button-highlight;
+}
+
+@mixin win95-button {
+  background-color: $window-gray;
+  @include win95-border-outset;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  padding: 4px 8px;
+  cursor: pointer;
+  user-select: none;
+  
+  &:active {
+    @include win95-border-inset;
+    padding: 5px 7px 3px 9px;
+  }
+  
+  &:focus {
+    outline: 1px dotted $button-dark-shadow;
+    outline-offset: -4px;
+  }
+}
+
+// Base resets for Win95 look
+* {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+// Disable text smoothing for authentic look
+body {
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}

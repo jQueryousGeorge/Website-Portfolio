@@ -55,7 +55,7 @@ const initialDesktopIcons = [
     }
 ];
 
-const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, activeWindowId }) => {
+const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, onMinimizeWindow, activeWindowId }) => {
     const handleIconDoubleClick = (icon) => {
         onOpenWindow({
             id: icon.windowId,
@@ -81,28 +81,26 @@ const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, acti
                 ))}
             </div>
             
-            {Object.entries(openWindows).map(([id, windowData]) => {
-                const window = windowData.windowData || {};
-                const state = windowData.state || {};
-                
+            {Object.entries(openWindows).map(([id, window]) => {
                 return (
                     <Window
                         key={id}
                         isActive={activeWindowId === id}
-                        isMinimized={state.isMinimized}
+                        isMinimized={window.isMinimized}
                         title={window.title}
                         onClose={() => onCloseWindow(id)}
                         onFocus={() => onWindowFocus(id)}
-                        onMinimize={() => onMinimizeWindow(id, !state.isMinimized)}
-                        defaultPosition={state.position || window.defaultPosition}
+                        onMinimize={() => onMinimizeWindow(id, !window.isMinimized)}
+                        defaultPosition={window.position}
                         width={window.width}
                         height={window.height}
+                        zIndex={window.zIndex}
                     >
                         {window.contentType === 'component' ? 
                             window.contentComponent ? 
                                 <window.contentComponent /> : 
                                 <div>Component not found</div> :
-                            <div className="window-content">{window.content}</div>
+                            <div className="window-text-content">{window.content}</div>
                         }
                     </Window>
                 );
