@@ -1,6 +1,7 @@
 import './DesktopIcon.scss';
 
-const DefaultIcon = () => <span className="icon-placeholder">📄</span>; // Simple document emoji
+// const DefaultIcon = () => <span className="icon-placeholder">📄</span>; // Simple document emoji
+const DefaultIcon = () => <span className="icon-placeholder"></span>; // Simple document emoji
 
 const DesktopIcon = ({ label, onDoubleClick }) => {
     return (
