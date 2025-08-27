@@ -1,3 +1,6 @@
+import AboutMe from '../components/portfolio_sections/AboutMe'
+import Contact from '../components/portfolio_sections/Contact'
+import Projects from '../components/portfolio_sections/Projects'
 import myComputerIcon from '../assets/icons/my_computer.ico';
 import recycleBin from '../assets/icons/recycle_bin_with_paper.ico';
 
