@@ -4,21 +4,16 @@ import Projects from '../components/portfolio_sections/Projects'
 import myComputerIcon from '../assets/icons/my_computer.ico';
 import recycleBinIcon from '../assets/icons/recycle_bin_with_paper.ico';
 import aboutMeIcon from '../assets/icons/about_me_icon.ico';
+import contactIcon from '../assets/icons/mailbox_with_phone.ico';
+import projectsIcon from '../assets/icons/user_with_computer.ico';
 
 const ICON_IMAGES = {
     computer: myComputerIcon,
     recycleBin: recycleBinIcon,
-    aboutMe: aboutMeIcon
+    aboutMe: aboutMeIcon,
+    contact: contactIcon,
+    projects: projectsIcon
 };
-
-// export const initialDesktopIcons = [
-//     {
-//         id: 'computer',
-//         title: 'My Computer',
-//         image: ICON_IMAGES.computer,
-//         position: { x: 50, y: 50 }
-//     }
-// ];
 
 export const initialDesktopIcons = [
     { 
@@ -52,7 +47,8 @@ export const initialDesktopIcons = [
     },
     { 
         id: 'projects', 
-        label: 'Projects', 
+        label: 'Projects',
+        image: ICON_IMAGES.projects, 
         windowId: 'projectsWindow', 
         contentType: 'component', 
         contentComponent: Projects,
@@ -62,7 +58,8 @@ export const initialDesktopIcons = [
     },
     { 
         id: 'contact', 
-        label: 'Contact', 
+        label: 'Contact',
+        image: ICON_IMAGES.contact, 
         windowId: 'contactWindow', 
         contentType: 'component', 
         contentComponent: Contact,
