@@ -29,6 +29,7 @@ const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, onMi
                     <DesktopIcon
                         key={icon.id}
                         label={icon.label}
+                        imgSrc={icon.image}
                         onDoubleClick={() => handleIconDoubleClick(icon)}
                     />    
                 ))}
