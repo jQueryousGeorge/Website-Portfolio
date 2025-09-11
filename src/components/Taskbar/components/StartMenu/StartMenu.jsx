@@ -3,6 +3,7 @@ import './StartMenu.scss';
 import AboutMe from '../../../portfolio_sections/AboutMe';
 import Projects from '../../../portfolio_sections/Projects';
 import Contact from '../../../portfolio_sections/Contact';
+import InternetExplorer from '../../../apps/InternetExplorer/InternetExplorer';
 
 const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     const [activeSubmenu, setActiveSubmenu] = useState(null);
@@ -17,8 +18,10 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             hasSubmenu: true,
             submenu: [
                 { id: 'notepad', label: 'Notepad', icon: '📝' },
+                { id: 'internet-explorer', label: 'Internet Explorer', icon: '🌐' },
                 { id: 'calculator', label: 'Calculator', icon: '🧮' },
-                { id: 'games', label: 'Games', icon: '🎮', hasSubmenu: true,
+                {
+                    id: 'games', label: 'Games', icon: '🎮', hasSubmenu: true,
                     submenu: [
                         { id: 'solitaire', label: 'Solitaire', icon: '🃏' },
                         { id: 'minesweeper', label: 'Minesweeper', icon: '💣' }
@@ -80,7 +83,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     // Close menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target) && 
+            if (menuRef.current && !menuRef.current.contains(event.target) &&
                 !event.target.closest('.start-button')) {
                 onClose();
                 setActiveSubmenu(null);
@@ -107,6 +110,21 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             return;
         }
 
+        // Handle I.E. item
+        if (item.id === 'internet-explorer') {
+            onOpenWindow({
+                id: 'internetExplorerWindow',
+                title: 'Internet Explorer',
+                contentType: 'component',
+                contentComponent: InternetExplorer,
+                defaultPosition: { x: 100, y: 100 },
+                width: 800,
+                height: 600
+            });
+            onClose();
+            return;
+        }
+
         // Handle portfolio items
         if (item.id === 'about-me') {
             onOpenWindow({
@@ -121,7 +139,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             onClose();
             return;
         }
-        
+
         if (item.id === 'projects') {
             onOpenWindow({
                 id: 'projectsWindow',
@@ -135,7 +153,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             onClose();
             return;
         }
-        
+
         if (item.id === 'contact') {
             onOpenWindow({
                 id: 'contactWindow',
@@ -149,7 +167,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             onClose();
             return;
         }
-        
+
         if (item.id === 'skills') {
             onOpenWindow({
                 id: 'skillsWindow',
@@ -191,7 +209,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                 <span className="menu-icon">{item.icon}</span>
                 <span className="menu-label">{item.label}</span>
                 {item.hasSubmenu && <span className="submenu-arrow">▶</span>}
-                
+
                 {item.hasSubmenu && activeSubmenu === item.id && item.submenu && (
                     <div className={`submenu level-${level + 1}`}>
                         {item.submenu.map(subItem => renderMenuItem(subItem, level + 1))}
