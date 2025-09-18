@@ -1,10 +1,7 @@
 @import '../../../styles/variables';
 
-.height-100 {
-    height: 100% !important;
-    display: flex;
-    flex-direction: column;
-}
+// Remove .ie-container entirely since you're using inline styles
+// and your JSX uses className="height-100" anyway
 
 .ie-nav-bar {
     display: flex;
@@ -13,7 +10,7 @@
     background-color: $window-gray;
     border-bottom: 1px solid $button-shadow;
     gap: 4px;
-    min-height: 32px;
+    height: 32px;
     flex-shrink: 0;
 }
 
@@ -33,11 +30,11 @@
     font-family: 'MS Sans Serif', sans-serif;
     font-size: 12px;
     user-select: none;
-    
+
     &:hover {
         background-color: #e0e0e0;
     }
-    
+
     &:active {
         border-left-color: $button-dark-shadow;
         border-top-color: $button-dark-shadow;
@@ -60,7 +57,7 @@
     font-family: 'MS Sans Serif', sans-serif;
     font-size: 11px;
     outline: none;
-    
+
     &:focus {
         border-color: $title-bar-active;
     }
@@ -79,11 +76,11 @@
     font-family: 'MS Sans Serif', sans-serif;
     font-size: 11px;
     user-select: none;
-    
+
     &:hover {
         background-color: #e0e0e0;
     }
-    
+
     &:active {
         border-left-color: $button-dark-shadow;
         border-top-color: $button-dark-shadow;
@@ -91,11 +88,4 @@
         border-bottom-color: $button-highlight;
         transform: translate(1px, 1px);
     }
-}
-
-iframe {
-    flex: 1;
-    border: none;
-    background-color: white;
-    min-height: 0;
 }

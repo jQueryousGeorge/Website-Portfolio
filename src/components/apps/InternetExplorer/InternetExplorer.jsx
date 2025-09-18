@@ -20,7 +20,16 @@ const InternetExplorer = () => {
     };
 
     return (
-        <div className="height-100">
+        <div
+            className="height-100"
+            style={{
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                margin: '-10px',
+                width: 'calc(100% + 20px)'
+            }}
+        >
             <div className="ie-nav-bar">
                 <button className="ie-nav-button" title="Back">←</button>
                 <button className="ie-nav-button" title="Forward">→</button>
@@ -38,10 +47,16 @@ const InternetExplorer = () => {
             </div>
             <iframe
                 src={url}
-                frameBorder="0"
-                height="100%"
-                width="100%"
+                className="ie-iframe"
                 title="Internet Explorer"
+                style={{
+                    flex: 1,
+                    border: 'none',
+                    width: '100%',
+                    height: '100%',
+                    minHeight: '600px', // Increased even more
+                    display: 'block'
+                }}
             />
         </div>
     );
