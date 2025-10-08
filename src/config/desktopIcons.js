@@ -1,6 +1,7 @@
 import AboutMe from '../components/portfolio_sections/AboutMe'
 import Contact from '../components/portfolio_sections/Contact'
 import Projects from '../components/portfolio_sections/Projects'
+import InternetExplorer from '../components/apps/InternetExplorer/InternetExplorer'
 import myComputerIcon from '../assets/icons/my_computer.ico';
 import recycleBinIcon from '../assets/icons/recycle_bin_with_paper.ico';
 import aboutMeIcon from '../assets/icons/about_me_icon.ico';
@@ -12,7 +13,8 @@ const ICON_IMAGES = {
     recycleBin: recycleBinIcon,
     aboutMe: aboutMeIcon,
     contact: contactIcon,
-    projects: projectsIcon
+    projects: projectsIcon,
+    // internetExplorer: ieIcon, // Add this when you have an IE icon
 };
 
 export const initialDesktopIcons = [
@@ -26,13 +28,24 @@ export const initialDesktopIcons = [
         defaultPosition: { x: 100, y: 100 }
     },
     { 
+        id: 'internet-explorer', 
+        label: 'Internet Explorer',
+        // image: ICON_IMAGES.internetExplorer, // Use this when you add the icon
+        windowId: 'internetExplorerWindow', 
+        contentType: 'component', 
+        contentComponent: InternetExplorer,
+        defaultPosition: { x: 50, y: 50 },
+        width: 1200,
+        height: 800
+    },
+    { 
         id: 'recycle-bin', 
         label: 'Recycle Bin',
         image: ICON_IMAGES.recycleBin, 
         windowId: 'recycleBinWindow', 
         contentType: 'text', 
         content: 'Recycle Bin is empty',
-        defaultPosition: { x: 100, y: 200 }
+        defaultPosition: { x: 100, y: 260 }
     },
     { 
         id: 'about-me', 
@@ -41,7 +54,7 @@ export const initialDesktopIcons = [
         windowId: 'aboutMeWindow', 
         contentType: 'component', 
         contentComponent: AboutMe,
-        defaultPosition: { x: 100, y: 300 },
+        defaultPosition: { x: 100, y: 340 },
         width: 500,
         height: 400
     },
