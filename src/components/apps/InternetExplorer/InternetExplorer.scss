@@ -31,16 +31,21 @@
     font-size: 12px;
     user-select: none;
 
-    &:hover {
+    &:hover:not(:disabled) {
         background-color: #e0e0e0;
     }
 
-    &:active {
+    &:active:not(:disabled) {
         border-left-color: $button-dark-shadow;
         border-top-color: $button-dark-shadow;
         border-right-color: $button-highlight;
         border-bottom-color: $button-highlight;
         transform: translate(1px, 1px);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        color: $button-shadow;
     }
 }
 
