@@ -6,7 +6,7 @@ import Contact from '../../../portfolio_sections/Contact';
 import InternetExplorer from '../../../apps/InternetExplorer/InternetExplorer';
 
 const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
-    const [activeSubmenu, setActiveSubmenu] = useState(null);
+    const [activeSubmenuByLevel, setActiveSubmenuByLevel] = useState({});
     const menuRef = useRef(null);
 
     // Menu items configuration
@@ -182,29 +182,42 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
         }
     };
 
-    const handleMouseEnter = (item) => {
+    const handleMouseEnter = (item, level) => {
         if (item && item.hasSubmenu) {
-            setActiveSubmenu(item.id);
+            setActiveSubmenuByLevel((prev) => {
+                const next = {};
+                // keep levels up to current level
+                for (const key in prev) {
+                    const numericKey = Number(key);
+                    if (!Number.isNaN(numericKey) && numericKey < level) {
+                        next[numericKey] = prev[numericKey];
+                    }
+                }
+                next[level] = item.id;
+                return next;
+            });
         }
     };
 
-    const renderMenuItem = (item, level = 0) => {
+    const renderMenuItem = (item, level = 0, index = 0) => {
         if (item.type === 'separator') {
-            return <div key={`separator-${level}-${Math.random()}`} className="menu-separator" />;
+            return <div key={`separator-${level}-${index}`} className="menu-separator" />;
         }
+
+        const isActiveAtLevel = activeSubmenuByLevel[level] === item.id;
 
         return (
             <div
                 key={item.id}
-                className={`menu-item ${item.hasSubmenu ? 'has-submenu' : ''} ${activeSubmenu === item.id ? 'active' : ''}`}
+                className={`menu-item ${item.hasSubmenu ? 'has-submenu' : ''} ${isActiveAtLevel ? 'active' : ''}`}
                 onClick={(e) => handleItemClick(item, e)}
-                onMouseEnter={() => handleMouseEnter(item)}
+                onMouseEnter={() => handleMouseEnter(item, level)}
             >
                 <span className="menu-icon">{item.icon}</span>
                 <span className="menu-label">{item.label}</span>
                 {item.hasSubmenu && <span className="submenu-arrow">▶</span>}
 
-                {item.hasSubmenu && activeSubmenu === item.id && item.submenu && (
+                {item.hasSubmenu && isActiveAtLevel && item.submenu && (
                     <div
                         className={`submenu level-${level + 1}`}
                         onMouseDown={(e) => {
@@ -214,7 +227,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                             }
                         }}
                     >
-                        {item.submenu.map(subItem => renderMenuItem(subItem, level + 1))}
+                        {item.submenu.map((subItem, subIndex) => renderMenuItem(subItem, level + 1, subIndex))}
                     </div>
                 )}
             </div>
@@ -243,7 +256,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                     </div>
                 </div>
                 <div className="start-menu-content">
-                    {menuItems.map(item => renderMenuItem(item))}
+                    {menuItems.map((item, idx) => renderMenuItem(item, 0, idx))}
                 </div>
             </div>
         </>
