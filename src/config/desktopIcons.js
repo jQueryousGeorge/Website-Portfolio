@@ -7,6 +7,7 @@ import recycleBinIcon from '../assets/icons/recycle_bin_with_paper.ico';
 import aboutMeIcon from '../assets/icons/about_me_icon.ico';
 import contactIcon from '../assets/icons/mailbox_with_phone.ico';
 import projectsIcon from '../assets/icons/user_with_computer.ico';
+import ieIcon from '../assets/icons/internet_explorer.ico';
 
 const ICON_IMAGES = {
     computer: myComputerIcon,
@@ -14,7 +15,7 @@ const ICON_IMAGES = {
     aboutMe: aboutMeIcon,
     contact: contactIcon,
     projects: projectsIcon,
-    // internetExplorer: ieIcon, // Add this when you have an IE icon
+    internetExplorer: ieIcon,
 };
 
 export const initialDesktopIcons = [
@@ -30,13 +31,13 @@ export const initialDesktopIcons = [
     { 
         id: 'internet-explorer', 
         label: 'Internet Explorer',
-        // image: ICON_IMAGES.internetExplorer, // Use this when you add the icon
+        image: ICON_IMAGES.internetExplorer,
         windowId: 'internetExplorerWindow', 
         contentType: 'component', 
         contentComponent: InternetExplorer,
         defaultPosition: { x: 50, y: 50 },
-        width: 1200,
-        height: 800
+        width: 800,
+        height: 600
     },
     { 
         id: 'recycle-bin', 

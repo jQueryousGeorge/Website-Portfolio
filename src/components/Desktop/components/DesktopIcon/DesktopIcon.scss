@@ -1,27 +1,25 @@
 @import '../../../../styles/_variables.scss';
 
 .desktop-icon {
-    width: 75px; // Typical width for an icon cell
-    height: 75px; // Typical height
+    width: 75px;
+    height: 75px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; // Align items to the top of the cell
+    justify-content: flex-start;
     padding: 4px;
     cursor: pointer;
     text-align: center;
-    margin: 5px; // Spacing between icons
+    margin: 5px;
 
-    .icon-image {
-        width: 32px; // Standard Win95 icon size
-        height: 32px;
-        margin-bottom: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 28px; // For emoji placeholder
-        background-color: #fff; // For a white box for the icon
-        border: 1px solid $button-shadow; // Example border
+    .icon-image,
+    .desktop-icon-image,
+    img {
+        width: 32px !important;
+        height: 32px !important;
+        object-fit: contain;
+        margin-bottom: 4px;
+        display: block;
     }
 
     .icon-label {
