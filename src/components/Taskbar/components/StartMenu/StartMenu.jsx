@@ -80,24 +80,10 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
         menuItems[0].submenu.push(...portfolioItems);
     }
 
-    // Close menu when clicking outside
+    // Click-away handled via overlay element
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target) &&
-                !event.target.closest('.start-button')) {
-                onClose();
-                setActiveSubmenu(null);
-            }
-        };
-
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isOpen, onClose]);
+        return undefined;
+    }, []);
 
     const handleItemClick = (item, event) => {
         // If item has submenu, don't close menu, just show submenu
@@ -238,26 +224,29 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     if (!isOpen) return null;
 
     return (
-        <div
-            className="start-menu"
-            ref={menuRef}
-            onMouseDown={(e) => {
-                e.stopPropagation();
-                if (e.nativeEvent && typeof e.nativeEvent.stopPropagation === 'function') {
-                    e.nativeEvent.stopPropagation();
-                }
-            }}
-        >
-            <div className="start-menu-sidebar">
-                <div className="sidebar-text">
-                    <span>Windows</span>
-                    <span className="version">95</span>
+        <>
+            <div className="start-menu-overlay" onMouseDown={onClose} />
+            <div
+                className="start-menu"
+                ref={menuRef}
+                onMouseDown={(e) => {
+                    e.stopPropagation();
+                    if (e.nativeEvent && typeof e.nativeEvent.stopPropagation === 'function') {
+                        e.nativeEvent.stopPropagation();
+                    }
+                }}
+            >
+                <div className="start-menu-sidebar">
+                    <div className="sidebar-text">
+                        <span>Windows</span>
+                        <span className="version">95</span>
+                    </div>
+                </div>
+                <div className="start-menu-content">
+                    {menuItems.map(item => renderMenuItem(item))}
                 </div>
             </div>
-            <div className="start-menu-content">
-                {menuItems.map(item => renderMenuItem(item))}
-            </div>
-        </div>
+        </>
     );
 };
 
