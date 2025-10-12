@@ -99,7 +99,13 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
         };
     }, [isOpen, onClose]);
 
-    const handleItemClick = (item) => {
+    const handleItemClick = (item, event) => {
+        // If item has submenu, don't close menu, just show submenu
+        if (item.hasSubmenu) {
+            event.stopPropagation();
+            return;
+        }
+
         // Handle special cases
         if (item.id === 'shutdown') {
             if (window.confirm('Are you sure you want to shut down Windows 95?')) {
@@ -190,8 +196,10 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
         }
     };
 
-    const handleMouseEnter = (itemId) => {
-        setActiveSubmenu(itemId);
+    const handleMouseEnter = (item) => {
+        if (item && item.hasSubmenu) {
+            setActiveSubmenu(item.id);
+        }
     };
 
     const renderMenuItem = (item, level = 0) => {
@@ -203,15 +211,23 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             <div
                 key={item.id}
                 className={`menu-item ${item.hasSubmenu ? 'has-submenu' : ''} ${activeSubmenu === item.id ? 'active' : ''}`}
-                onClick={() => handleItemClick(item)}
-                onMouseEnter={() => handleMouseEnter(item.id)}
+                onClick={(e) => handleItemClick(item, e)}
+                onMouseEnter={() => handleMouseEnter(item)}
             >
                 <span className="menu-icon">{item.icon}</span>
                 <span className="menu-label">{item.label}</span>
                 {item.hasSubmenu && <span className="submenu-arrow">▶</span>}
 
                 {item.hasSubmenu && activeSubmenu === item.id && item.submenu && (
-                    <div className={`submenu level-${level + 1}`}>
+                    <div
+                        className={`submenu level-${level + 1}`}
+                        onMouseDown={(e) => {
+                            e.stopPropagation();
+                            if (e.nativeEvent && typeof e.nativeEvent.stopPropagation === 'function') {
+                                e.nativeEvent.stopPropagation();
+                            }
+                        }}
+                    >
                         {item.submenu.map(subItem => renderMenuItem(subItem, level + 1))}
                     </div>
                 )}
@@ -222,7 +238,16 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="start-menu" ref={menuRef}>
+        <div
+            className="start-menu"
+            ref={menuRef}
+            onMouseDown={(e) => {
+                e.stopPropagation();
+                if (e.nativeEvent && typeof e.nativeEvent.stopPropagation === 'function') {
+                    e.nativeEvent.stopPropagation();
+                }
+            }}
+        >
             <div className="start-menu-sidebar">
                 <div className="sidebar-text">
                     <span>Windows</span>
