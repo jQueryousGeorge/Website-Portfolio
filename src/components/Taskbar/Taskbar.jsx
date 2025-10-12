@@ -49,7 +49,9 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
                             onClick={() => handleTaskbarButtonClick(id)}
                             title={window.title}
                         >
-                            <span className="window-icon">📄</span>
+                            <span className="window-icon">
+                                {window.icon ? <img src={window.icon} alt="icon" /> : '📄'}
+                            </span>
                             <span className="window-title">{window.title}</span>
                         </button>
                     ))}

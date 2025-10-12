@@ -80,6 +80,14 @@
         justify-content: center;
         font-size: 14px;
         flex-shrink: 0;
+
+        img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            image-rendering: pixelated;
+            display: block;
+        }
     }
     
     .menu-label {
@@ -129,6 +137,18 @@
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     padding: 2px;
     z-index: 10000;
+
+    // Submenu: better readability and taller rows
+    .menu-item {
+        color: black;           // default text
+        height: 26px;           // taller than top-level (22px)
+        padding: 3px 6px;       // extra vertical space
+
+        &:hover,
+        &.active {
+            color: white;       // readable on blue highlight
+        }
+    }
     
     &.level-2 {
         z-index: 10001;

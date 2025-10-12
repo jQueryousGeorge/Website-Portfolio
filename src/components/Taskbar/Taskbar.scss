@@ -85,6 +85,14 @@
     .window-icon {
         margin-right: 4px;
         font-size: 14px;
+
+        img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            image-rendering: pixelated;
+            display: block;
+        }
     }
     
     .window-title {

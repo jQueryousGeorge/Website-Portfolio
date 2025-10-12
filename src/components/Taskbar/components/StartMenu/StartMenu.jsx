@@ -4,6 +4,7 @@ import AboutMe from '../../../portfolio_sections/AboutMe';
 import Projects from '../../../portfolio_sections/Projects';
 import Contact from '../../../portfolio_sections/Contact';
 import InternetExplorer from '../../../apps/InternetExplorer/InternetExplorer';
+import ieIcon from '../../../../assets/icons/internet_explorer.ico';
 
 const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     const [activeSubmenuByLevel, setActiveSubmenuByLevel] = useState({});
@@ -18,7 +19,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             hasSubmenu: true,
             submenu: [
                 { id: 'notepad', label: 'Notepad', icon: '📝' },
-                { id: 'internet-explorer', label: 'Internet Explorer', icon: '🌐' },
+                { id: 'internet-explorer', label: 'Internet Explorer', icon: <img src={ieIcon} alt="Internet Explorer" /> },
                 { id: 'calculator', label: 'Calculator', icon: '🧮' },
                 {
                     id: 'games', label: 'Games', icon: '🎮', hasSubmenu: true,
@@ -107,6 +108,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             onOpenWindow({
                 id: 'internetExplorerWindow',
                 title: 'Internet Explorer',
+                icon: ieIcon,
                 contentType: 'component',
                 contentComponent: InternetExplorer,
                 defaultPosition: { x: 100, y: 100 },
@@ -183,20 +185,21 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     };
 
     const handleMouseEnter = (item, level) => {
-        if (item && item.hasSubmenu) {
-            setActiveSubmenuByLevel((prev) => {
-                const next = {};
-                // keep levels up to current level
-                for (const key in prev) {
-                    const numericKey = Number(key);
-                    if (!Number.isNaN(numericKey) && numericKey < level) {
-                        next[numericKey] = prev[numericKey];
-                    }
+        setActiveSubmenuByLevel((prev) => {
+            const next = {};
+            // keep levels up to current level (not including current)
+            for (const key in prev) {
+                const numericKey = Number(key);
+                if (!Number.isNaN(numericKey) && numericKey < level) {
+                    next[numericKey] = prev[numericKey];
                 }
+            }
+            // only set current level if item has a submenu
+            if (item && item.hasSubmenu) {
                 next[level] = item.id;
-                return next;
-            });
-        }
+            }
+            return next;
+        });
     };
 
     const renderMenuItem = (item, level = 0, index = 0) => {

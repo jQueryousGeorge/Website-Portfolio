@@ -32,6 +32,7 @@ function App() {
         [windowData.id]: {
           id: windowData.id,
           title: windowData.title,
+          icon: windowData.icon, // optional per-window icon
           contentType: windowData.contentType,
           content: windowData.content,
           contentComponent: windowData.contentComponent,
