@@ -15,25 +15,25 @@ const InternetExplorer = () => {
     };
 
     const formatUrl = (input) => {
-        // If it's empty, return home
-        if (!input || input.trim() === '') {
+        const trimmedInput = input.trim();
+        
+        // If empty, return home URL
+        if (!trimmedInput) {
             return HOME_URL;
         }
         
-        const trimmed = input.trim();
-        
-        // If it already has a protocol, use as-is
-        if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
-            return trimmed;
+        // If it's already a valid URL with protocol, return as is
+        if (trimmedInput.startsWith('http://') || trimmedInput.startsWith('https://')) {
+            return trimmedInput;
         }
         
         // If it looks like a domain (has a dot and no spaces), add https://
-        if (trimmed.includes('.') && !trimmed.includes(' ')) {
-            return `https://${trimmed}`;
+        if (trimmedInput.includes('.') && !trimmedInput.includes(' ')) {
+            return `https://${trimmedInput}`;
         }
         
-        // Otherwise, treat it as a search query (use Google)
-        return `https://www.google.com/search?q=${encodeURIComponent(trimmed)}`;
+        // Otherwise, treat it as a Google search query
+        return `https://www.google.com/search?igu=1&q=${encodeURIComponent(trimmedInput)}`;
     };
 
     const navigateToUrl = (newUrl) => {
