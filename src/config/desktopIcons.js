@@ -1,3 +1,5 @@
+// This file, `src/config/desktopIcons.js` defines all apps available for use on the Desktop. 
+// In other words, it's the central config file for apps on the Desktop.
 import AboutMe from '../components/portfolio_sections/AboutMe'
 import Contact from '../components/portfolio_sections/Contact'
 import Projects from '../components/portfolio_sections/Projects'
