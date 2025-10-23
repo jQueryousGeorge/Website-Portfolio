@@ -153,6 +153,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             onOpenWindow({
                 id: 'calculatorWindow',
                 title: 'Calculator',
+                icon: calculatorIcon,
                 contentType: 'component',
                 contentComponent: Calculator,
                 defaultPosition: { x: 120, y: 120 },
