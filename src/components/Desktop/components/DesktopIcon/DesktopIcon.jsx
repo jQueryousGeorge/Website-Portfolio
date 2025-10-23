@@ -2,9 +2,9 @@ import './DesktopIcon.scss';
 
 const GenericFileIcon = () => <span className="icon-placeholder">📄</span>; // Simple document emoji
 
-const DesktopIcon = ({ label, imgSrc, onDoubleClick }) => {
+const DesktopIcon = ({ label, imgSrc, onDoubleClick, className = '' }) => {
     return (
-        <div className='desktop-icon' role='button' onDoubleClick={onDoubleClick}>
+        <div className={`desktop-icon ${className}`} role='button' onDoubleClick={onDoubleClick}>
             <div className="icon-image">
                 {imgSrc ? <img src={imgSrc} alt={label || "desktop icon"} /> : <GenericFileIcon />}
             </div>

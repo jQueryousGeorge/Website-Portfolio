@@ -1,0 +1,11 @@
+.apps-folder { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+    gap: 8px; 
+    padding: 6px; 
+}
+.apps-item { display: flex; flex-direction: column; align-items: center; gap: 4px; user-select: none; }
+.apps-item .icon-wrap { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+.apps-item img { width: 32px; height: 32px; image-rendering: pixelated; }
+.apps-item .label { font-size: 11px; text-align: center; }
+

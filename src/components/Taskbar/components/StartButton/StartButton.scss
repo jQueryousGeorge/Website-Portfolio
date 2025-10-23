@@ -1,8 +1,8 @@
 @import '../../../../styles/variables';
 
 .start-button {
-    width: 54px;
-    height: 22px;
+    width: auto;
+    height: 24px;
     background-color: #c0c0c0;
     
     // Classic 3D raised effect
@@ -12,7 +12,7 @@
     border-right-color: #808080;
     border-bottom-color: #808080;
     
-    padding: 0 2px;
+    padding: 0 4px;
     font-family: "MS Sans Serif", sans-serif;
     font-size: 11px;
     font-weight: bold;
@@ -20,7 +20,7 @@
     
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 0;
     
     &:active, &.active {
         // Invert the borders for "pressed" effect
@@ -28,8 +28,7 @@
         border-top-color: #808080;
         border-right-color: #ffffff;
         border-bottom-color: #ffffff;
-        padding-top: 1px; // Slight content shift
-        padding-left: 1px;
+        transform: translate(-1px, 1px); // 1px left, 1px down for authentic feel
     }
     
     &:focus {
@@ -39,9 +38,9 @@
 }
 
 .windows-logo {
-  width: 16px;
-  height: 14px;
-  margin-right: 2px;
+  width: 20px;
+  height: 18px;
+  margin-right: 0;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
   image-rendering: pixelated;
@@ -49,6 +48,8 @@
 }
 
 .start-text {
-    font-weight: bold;
-    font-size: 11px;
+    font-weight: 900; // thicker
+    font-size: 12px;  // slightly larger like classic Win95
+    letter-spacing: 0;
+    margin-left: 1px; // tuck text close to the logo
 }

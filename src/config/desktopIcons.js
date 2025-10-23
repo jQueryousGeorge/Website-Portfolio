@@ -9,6 +9,8 @@ import InternetExplorer from '../components/apps/InternetExplorer/InternetExplor
 import Notepad from '../components/apps/Notepad/Notepad'
 import Calculator from '../components/apps/Calculator/Calculator'
 import WindowsExplorer from '../components/apps/WindowsExplorer/WindowsExplorer'
+import AppsFolder from '../components/apps/AppsFolder/AppsFolder'
+import folderIcon from '../assets/icons/folder.ico';
 import myComputerIcon from '../assets/icons/my_computer.ico';
 import recycleBinIcon from '../assets/icons/recycle_bin_with_paper.ico';
 import aboutMeIcon from '../assets/icons/about_me_icon.ico';
@@ -29,7 +31,8 @@ const ICON_IMAGES = {
     internetExplorer: ieIcon,
     notepad: notepadIcon,
     calculator: calculatorIcon,
-    windowsExplorer: windowsExplorerIcon
+    windowsExplorer: windowsExplorerIcon,
+    folder: folderIcon
 };
 
 // Configure each desktop icon with metadata:
@@ -44,26 +47,15 @@ export const initialDesktopIcons = [
         defaultPosition: { x: 100, y: 260 }
     },
     { 
-        id: 'windows-explorer', 
-        label: 'Windows Explorer',
-        image: ICON_IMAGES.windowsExplorer,
-        windowId: 'windowsExplorerWindow', 
+        id: 'apps-folder', 
+        label: 'Apps',
+        image: ICON_IMAGES.folder,
+        windowId: 'appsFolderWindow', 
         contentType: 'component', 
-        contentComponent: WindowsExplorer,
+        contentComponent: AppsFolder,
         defaultPosition: { x: 200, y: 120 },
-        width: 680,
-        height: 480
-    },
-    { 
-        id: 'calculator', 
-        label: 'Calculator',
-        image: ICON_IMAGES.calculator,
-        windowId: 'calculatorWindow', 
-        contentType: 'component', 
-        contentComponent: Calculator,
-        defaultPosition: { x: 80, y: 120 },
-        width: 320,
-        height: 380
+        width: 500,
+        height: 400
     },
     { 
         id: 'my-computer', 
@@ -84,17 +76,6 @@ export const initialDesktopIcons = [
         defaultPosition: { x: 50, y: 50 },
         width: 800,
         height: 600
-    },
-    { 
-        id: 'notepad', 
-        label: 'Notepad',
-        image: ICON_IMAGES.notepad,
-        windowId: 'notepadWindow', 
-        contentType: 'component', 
-        contentComponent: Notepad,
-        defaultPosition: { x: 100, y: 180 },
-        width: 600,
-        height: 450
     },
     { 
         id: 'about-me', 

@@ -15,6 +15,8 @@ import solitaireIcon from '../../../../assets/icons/solitaire.ico';
 import MinesweeperInfo from '../../../apps/MinesweeperInfo/MinesweeperInfo';
 import minesweeperIcon from '../../../../assets/icons/minesweeper.ico';
 import gamesIcon from '../../../../assets/icons/games.ico';
+import textDocumentIcon from '../../../../assets/icons/text_document.ico';
+import documentsFolderIcon from '../../../../assets/icons/documents_folder.ico';
 
 const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     const [activeSubmenuByLevel, setActiveSubmenuByLevel] = useState({});
@@ -45,11 +47,11 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
         {
             id: 'documents',
             label: 'Documents',
-            icon: '📄',
+            icon: <img src={documentsFolderIcon} alt="Documents" />,
             hasSubmenu: true,
             submenu: [
-                { id: 'resume', label: 'Resume.doc', icon: '📄' },
-                { id: 'cover-letter', label: 'Cover Letter.doc', icon: '📄' }
+                { id: 'resume', label: 'Resume.doc', icon: <img src={textDocumentIcon} alt="Documents" /> },
+                { id: 'cover-letter', label: 'Cover Letter.doc', icon: <img src={textDocumentIcon} alt="Documents" /> }
             ]
         },
         {

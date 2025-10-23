@@ -29,6 +29,7 @@ const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, onMi
                         label={icon.label}
                         imgSrc={icon.image}
                         onDoubleClick={() => handleIconDoubleClick(icon)}
+                        className={icon.id === 'apps-folder' ? 'desktop-icon--large' : ''}
                     />    
                 ))}
             </div>
