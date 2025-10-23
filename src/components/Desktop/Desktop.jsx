@@ -51,7 +51,10 @@ const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, onMi
                     >
                         {window.contentType === 'component' ? 
                             window.contentComponent ? 
-                                <window.contentComponent onOpenWindow={onOpenWindow} /> : 
+                                <window.contentComponent 
+                                    onOpenWindow={onOpenWindow} 
+                                    onCloseWindow={() => onCloseWindow(id)}
+                                /> : 
                                 <div>Component not found</div> :
                             <div className="window-text-content">{window.content}</div>
                         }

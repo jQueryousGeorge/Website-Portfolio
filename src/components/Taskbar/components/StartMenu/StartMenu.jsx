@@ -17,6 +17,7 @@ import minesweeperIcon from '../../../../assets/icons/minesweeper.ico';
 import gamesIcon from '../../../../assets/icons/games.ico';
 import textDocumentIcon from '../../../../assets/icons/text_document.ico';
 import documentsFolderIcon from '../../../../assets/icons/documents_folder.ico';
+import runIcon from '../../../../assets/icons/run.ico';
 import Run from '../../../apps/Run/Run';
 
 const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
@@ -76,7 +77,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             ]
         },
         { id: 'help', label: 'Help', icon: '❓' },
-        { id: 'run', label: 'Run...', icon: '▶️' },
+        { id: 'run', label: 'Run...', icon: <img src={runIcon} alt="Run" /> },
         { type: 'separator' },
         { id: 'shutdown', label: 'Shut Down...', icon: '⏻' }
     ];
@@ -186,6 +187,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             onOpenWindow({
                 id: 'runDialogWindow',
                 title: 'Run',
+                icon: runIcon,
                 contentType: 'component',
                 contentComponent: Run,
                 width: 420,

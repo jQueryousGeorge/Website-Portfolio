@@ -3,6 +3,7 @@ import "./Taskbar.scss";
 import StartButton from "./components/StartButton/StartButton";
 import StartMenu from "./components/StartMenu/StartMenu";
 import SystemTray from "./components/SystemTray/SystemTray";
+import wmvIcon from '../../assets/icons/windows_media_viewer.ico';
 
 const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWindow, activeWindowId }) => {
     const [startMenuOpen, setStartMenuOpen] = useState(false);
@@ -50,7 +51,7 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
                             title={window.title}
                         >
                             <span className="window-icon">
-                                {window.icon ? <img src={window.icon} alt="icon" /> : '📄'}
+                                {window.icon ? <img src={window.icon} alt="icon" /> : window.title?.startsWith('WMV') ? <img src={wmvIcon} alt="WMV" /> : '📄'}
                             </span>
                             <span className="window-title">{window.title}</span>
                         </button>
