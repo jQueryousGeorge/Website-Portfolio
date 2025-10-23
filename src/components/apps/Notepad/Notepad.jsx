@@ -48,7 +48,7 @@ const Notepad = () => {
                         className="menu-button" 
                         onClick={toggleMenu}
                     >
-                        File
+                        Save...
                     </button>
                     {isMenuOpen && (
                         <div className="menu-dropdown">

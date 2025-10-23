@@ -5,6 +5,8 @@ import Projects from '../../../portfolio_sections/Projects';
 import Contact from '../../../portfolio_sections/Contact';
 import InternetExplorer from '../../../apps/InternetExplorer/InternetExplorer';
 import ieIcon from '../../../../assets/icons/internet_explorer.ico';
+import Notepad from '../../../apps/Notepad/Notepad';
+import notepadIcon from '../../../../assets/icons/notepad.ico';
 
 const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     const [activeSubmenuByLevel, setActiveSubmenuByLevel] = useState({});
@@ -18,7 +20,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             icon: '📁',
             hasSubmenu: true,
             submenu: [
-                { id: 'notepad', label: 'Notepad', icon: '📝' },
+                { id: 'notepad', label: 'Notepad', icon: <img src={notepadIcon} alt="Notepad" /> },
                 { id: 'internet-explorer', label: 'Internet Explorer', icon: <img src={ieIcon} alt="Internet Explorer" /> },
                 { id: 'calculator', label: 'Calculator', icon: '🧮' },
                 {
@@ -114,6 +116,22 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                 defaultPosition: { x: 100, y: 100 },
                 width: 800,
                 height: 600
+            });
+            onClose();
+            return;
+        }
+
+        // Handle Notepad item
+        if (item.id === 'notepad') {
+            onOpenWindow({
+                id: 'notepadWindow',
+                title: 'Notepad',
+                icon: notepadIcon,
+                contentType: 'component',
+                contentComponent: Notepad,
+                defaultPosition: { x: 100, y: 180 },
+                width: 600,
+                height: 450
             });
             onClose();
             return;
