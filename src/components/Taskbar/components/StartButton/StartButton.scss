@@ -1,7 +1,7 @@
 @import '../../../../styles/variables';
 
 .start-button {
-    width: auto;
+    width: 59px; // close to classic width
     height: 24px;
     background-color: #c0c0c0;
     
@@ -12,15 +12,13 @@
     border-right-color: #808080;
     border-bottom-color: #808080;
     
-    padding: 0 4px;
+    padding: 0;
     font-family: "MS Sans Serif", sans-serif;
     font-size: 11px;
     font-weight: bold;
     cursor: pointer;
     
-    display: flex;
-    align-items: center;
-    gap: 0;
+    display: inline-block;
     
     &:active, &.active {
         // Invert the borders for "pressed" effect
@@ -37,19 +35,10 @@
     }
 }
 
-.windows-logo {
-  width: 20px;
-  height: 18px;
-  margin-right: 0;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
-  object-fit: contain;
-}
-
-.start-text {
-    font-weight: 900; // thicker
-    font-size: 12px;  // slightly larger like classic Win95
-    letter-spacing: 0;
-    margin-left: 1px; // tuck text close to the logo
+// Sprite-style image (logo + text) as background
+.start-button.sprite {
+    background-image: url('../../../../assets/icons/start_button_image.png');
+    background-repeat: no-repeat;
+    background-position: 2px 3px; // fine-tuned offset inside the raised frame
+    image-rendering: pixelated;
 }
