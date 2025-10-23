@@ -15,7 +15,7 @@ import contactIcon from '../assets/icons/mailbox_with_phone.ico';
 import projectsIcon from '../assets/icons/user_with_computer.ico';
 import ieIcon from '../assets/icons/internet_explorer.ico';
 import notepadIcon from '../assets/icons/notepad.ico';
-import calculatorIcon from '../assets/icons/my_computer.ico'; // placeholder, replace with calculator icon if available
+import calculatorIcon from '../assets/icons/calculator.ico'; // placeholder, replace with calculator icon if available
 
 // Set the icon images from the import statements above:
 const ICON_IMAGES = {

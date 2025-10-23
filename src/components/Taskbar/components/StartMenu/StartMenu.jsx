@@ -4,10 +4,17 @@ import AboutMe from '../../../portfolio_sections/AboutMe';
 import Projects from '../../../portfolio_sections/Projects';
 import Contact from '../../../portfolio_sections/Contact';
 import InternetExplorer from '../../../apps/InternetExplorer/InternetExplorer';
+import windowsExplorerIcon from '../../../../assets/icons/windows_explorer.ico';
 import ieIcon from '../../../../assets/icons/internet_explorer.ico';
 import Notepad from '../../../apps/Notepad/Notepad';
 import notepadIcon from '../../../../assets/icons/notepad.ico';
 import Calculator from '../../../apps/Calculator/Calculator';
+import calculatorIcon from '../../../../assets/icons/calculator.ico';
+import SolitaireInfo from '../../../apps/SolitaireInfo/SolitaireInfo';
+import solitaireIcon from '../../../../assets/icons/solitaire.ico';
+import MinesweeperInfo from '../../../apps/MinesweeperInfo/MinesweeperInfo';
+import minesweeperIcon from '../../../../assets/icons/minesweeper.ico';
+import gamesIcon from '../../../../assets/icons/games.ico';
 
 const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     const [activeSubmenuByLevel, setActiveSubmenuByLevel] = useState({});
@@ -23,15 +30,15 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
             submenu: [
                 { id: 'notepad', label: 'Notepad', icon: <img src={notepadIcon} alt="Notepad" /> },
                 { id: 'internet-explorer', label: 'Internet Explorer', icon: <img src={ieIcon} alt="Internet Explorer" /> },
-                { id: 'calculator', label: 'Calculator', icon: '🧮' },
+                { id: 'calculator', label: 'Calculator', icon: <img src={calculatorIcon} alt="Calculator" /> },
                 {
-                    id: 'games', label: 'Games', icon: '🎮', hasSubmenu: true,
+                    id: 'games', label: 'Games', icon: <img src={gamesIcon} alt="Games" className="menu-icon--large" />, hasSubmenu: true,
                     submenu: [
-                        { id: 'solitaire', label: 'Solitaire', icon: '🃏' },
-                        { id: 'minesweeper', label: 'Minesweeper', icon: '💣' }
+                        { id: 'solitaire', label: "Solitaire '95 (Microsoft Store)", icon: <img src={solitaireIcon} alt="Solitaire '95" /> },
+                        { id: 'minesweeper', label: 'Minesweeper (Microsoft Store)', icon: <img src={minesweeperIcon} alt="Minesweeper" /> }
                     ]
                 },
-                { id: 'explorer', label: 'Windows Explorer', icon: '🗂️' }
+                { id: 'explorer', label: 'Windows Explorer', icon: <img src={windowsExplorerIcon} alt="Windows Explorer" /> }
             ]
         },
         {
@@ -163,6 +170,38 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                 defaultPosition: { x: 150, y: 100 },
                 width: 500,
                 height: 400
+            });
+            onClose();
+            return;
+        }
+
+        // Games → Solitaire: open info window with link to store
+        if (item.id === 'solitaire') {
+            onOpenWindow({
+                id: 'solitaireInfoWindow',
+                title: "Solitaire '95",
+                icon: solitaireIcon,
+                contentType: 'component',
+                contentComponent: SolitaireInfo,
+                defaultPosition: { x: 160, y: 140 },
+                width: 420,
+                height: 260
+            });
+            onClose();
+            return;
+        }
+
+        // Games → Minesweeper: open info window with link to store
+        if (item.id === 'minesweeper') {
+            onOpenWindow({
+                id: 'minesweeperInfoWindow',
+                title: 'Minesweeper',
+                icon: minesweeperIcon,
+                contentType: 'component',
+                contentComponent: MinesweeperInfo,
+                defaultPosition: { x: 180, y: 160 },
+                width: 420,
+                height: 260
             });
             onClose();
             return;

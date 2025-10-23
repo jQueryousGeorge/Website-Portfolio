@@ -1,0 +1,51 @@
+.solitaire-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    color: #000;
+}
+
+.solitaire-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.solitaire-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.solitaire-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.solitaire-actions {
+    margin-top: 8px;
+}
+
+.win95-button {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-left-color: #ffffff;
+    border-top-color: #ffffff;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    padding: 6px 12px;
+    color: #000;
+    font-size: 12px;
+}
+
+.win95-button:active {
+    border-left-color: #808080;
+    border-top-color: #808080;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+
