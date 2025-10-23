@@ -8,6 +8,7 @@ import Projects from '../components/portfolio_sections/Projects'
 import InternetExplorer from '../components/apps/InternetExplorer/InternetExplorer'
 import Notepad from '../components/apps/Notepad/Notepad'
 import Calculator from '../components/apps/Calculator/Calculator'
+import WindowsExplorer from '../components/apps/WindowsExplorer/WindowsExplorer'
 import myComputerIcon from '../assets/icons/my_computer.ico';
 import recycleBinIcon from '../assets/icons/recycle_bin_with_paper.ico';
 import aboutMeIcon from '../assets/icons/about_me_icon.ico';
@@ -39,6 +40,17 @@ export const initialDesktopIcons = [
         contentType: 'text', 
         content: 'Recycle Bin is empty',
         defaultPosition: { x: 100, y: 260 }
+    },
+    { 
+        id: 'windows-explorer', 
+        label: 'Windows Explorer',
+        image: ICON_IMAGES.computer,
+        windowId: 'windowsExplorerWindow', 
+        contentType: 'component', 
+        contentComponent: WindowsExplorer,
+        defaultPosition: { x: 200, y: 120 },
+        width: 680,
+        height: 480
     },
     { 
         id: 'calculator', 

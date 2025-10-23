@@ -31,6 +31,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                 { id: 'notepad', label: 'Notepad', icon: <img src={notepadIcon} alt="Notepad" /> },
                 { id: 'internet-explorer', label: 'Internet Explorer', icon: <img src={ieIcon} alt="Internet Explorer" /> },
                 { id: 'calculator', label: 'Calculator', icon: <img src={calculatorIcon} alt="Calculator" /> },
+                { id: 'explorer-shortcut', label: 'Windows Explorer', icon: <img src={windowsExplorerIcon} alt="Windows Explorer" /> },
                 {
                     id: 'games', label: 'Games', icon: <img src={gamesIcon} alt="Games" className="menu-icon--large" />, hasSubmenu: true,
                     submenu: [
@@ -38,7 +39,7 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                         { id: 'minesweeper', label: 'Minesweeper (Microsoft Store)', icon: <img src={minesweeperIcon} alt="Minesweeper" /> }
                     ]
                 },
-                { id: 'explorer', label: 'Windows Explorer', icon: <img src={windowsExplorerIcon} alt="Windows Explorer" /> }
+                
             ]
         },
         {
@@ -155,6 +156,22 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                 defaultPosition: { x: 120, y: 120 },
                 width: 320,
                 height: 380
+            });
+            onClose();
+            return;
+        }
+
+        // Handle Windows Explorer
+        if (item.id === 'explorer-shortcut') {
+            onOpenWindow({
+                id: 'windowsExplorerWindow',
+                title: 'Windows Explorer',
+                icon: windowsExplorerIcon,
+                contentType: 'component',
+                contentComponent: require('../../../apps/WindowsExplorer/WindowsExplorer').default,
+                defaultPosition: { x: 200, y: 120 },
+                width: 680,
+                height: 480
             });
             onClose();
             return;
