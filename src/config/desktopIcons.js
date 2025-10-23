@@ -1,5 +1,7 @@
 // This file, `src/config/desktopIcons.js` defines all apps available for use on the Desktop. 
-// In other words, it's the central config file for apps on the Desktop.
+// In other words, it's the central config file for defining what apps are available on the Desktop.
+
+// Import all of the app components && their icons
 import AboutMe from '../components/portfolio_sections/AboutMe'
 import Contact from '../components/portfolio_sections/Contact'
 import Projects from '../components/portfolio_sections/Projects'
@@ -11,6 +13,7 @@ import contactIcon from '../assets/icons/mailbox_with_phone.ico';
 import projectsIcon from '../assets/icons/user_with_computer.ico';
 import ieIcon from '../assets/icons/internet_explorer.ico';
 
+// Set the icon images from the import statements above:
 const ICON_IMAGES = {
     computer: myComputerIcon,
     recycleBin: recycleBinIcon,
@@ -20,6 +23,7 @@ const ICON_IMAGES = {
     internetExplorer: ieIcon,
 };
 
+// Configure each desktop icon with metadata:
 export const initialDesktopIcons = [
     { 
         id: 'my-computer', 
