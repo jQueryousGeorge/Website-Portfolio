@@ -17,6 +17,7 @@ import minesweeperIcon from '../../../../assets/icons/minesweeper.ico';
 import gamesIcon from '../../../../assets/icons/games.ico';
 import textDocumentIcon from '../../../../assets/icons/text_document.ico';
 import documentsFolderIcon from '../../../../assets/icons/documents_folder.ico';
+import Run from '../../../apps/Run/Run';
 
 const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     const [activeSubmenuByLevel, setActiveSubmenuByLevel] = useState({});
@@ -175,6 +176,20 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                 defaultPosition: { x: 200, y: 120 },
                 width: 680,
                 height: 480
+            });
+            onClose();
+            return;
+        }
+
+        // Handle Run dialog
+        if (item.id === 'run') {
+            onOpenWindow({
+                id: 'runDialogWindow',
+                title: 'Run',
+                contentType: 'component',
+                contentComponent: Run,
+                width: 420,
+                height: 160
             });
             onClose();
             return;
