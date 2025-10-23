@@ -29,6 +29,15 @@ const ICON_IMAGES = {
 // Configure each desktop icon with metadata:
 export const initialDesktopIcons = [
     { 
+        id: 'recycle-bin', 
+        label: 'Recycle Bin',
+        image: ICON_IMAGES.recycleBin, 
+        windowId: 'recycleBinWindow', 
+        contentType: 'text', 
+        content: 'Recycle Bin is empty',
+        defaultPosition: { x: 100, y: 260 }
+    },
+    { 
         id: 'my-computer', 
         label: 'My Computer',
         image: ICON_IMAGES.computer, 
@@ -47,15 +56,6 @@ export const initialDesktopIcons = [
         defaultPosition: { x: 50, y: 50 },
         width: 800,
         height: 600
-    },
-    { 
-        id: 'recycle-bin', 
-        label: 'Recycle Bin',
-        image: ICON_IMAGES.recycleBin, 
-        windowId: 'recycleBinWindow', 
-        contentType: 'text', 
-        content: 'Recycle Bin is empty',
-        defaultPosition: { x: 100, y: 260 }
     },
     { 
         id: 'notepad', 
