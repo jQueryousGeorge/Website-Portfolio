@@ -10,6 +10,7 @@ const Desktop = ({ openWindows, onOpenWindow, onCloseWindow, onWindowFocus, onMi
         onOpenWindow({
             id: icon.windowId,
             title: icon.label,
+            icon: icon.image,
             contentType: icon.contentType,
             content: icon.content,
             contentComponent: icon.contentComponent,

@@ -6,12 +6,14 @@ import AboutMe from '../components/portfolio_sections/AboutMe'
 import Contact from '../components/portfolio_sections/Contact'
 import Projects from '../components/portfolio_sections/Projects'
 import InternetExplorer from '../components/apps/InternetExplorer/InternetExplorer'
+import Notepad from '../components/apps/Notepad/Notepad'
 import myComputerIcon from '../assets/icons/my_computer.ico';
 import recycleBinIcon from '../assets/icons/recycle_bin_with_paper.ico';
 import aboutMeIcon from '../assets/icons/about_me_icon.ico';
 import contactIcon from '../assets/icons/mailbox_with_phone.ico';
 import projectsIcon from '../assets/icons/user_with_computer.ico';
 import ieIcon from '../assets/icons/internet_explorer.ico';
+import notepadIcon from '../assets/icons/notepad.ico';
 
 // Set the icon images from the import statements above:
 const ICON_IMAGES = {
@@ -21,6 +23,7 @@ const ICON_IMAGES = {
     contact: contactIcon,
     projects: projectsIcon,
     internetExplorer: ieIcon,
+    notepad: notepadIcon
 };
 
 // Configure each desktop icon with metadata:
@@ -53,6 +56,17 @@ export const initialDesktopIcons = [
         contentType: 'text', 
         content: 'Recycle Bin is empty',
         defaultPosition: { x: 100, y: 260 }
+    },
+    { 
+        id: 'notepad', 
+        label: 'Notepad',
+        image: ICON_IMAGES.notepad,
+        windowId: 'notepadWindow', 
+        contentType: 'component', 
+        contentComponent: Notepad,
+        defaultPosition: { x: 100, y: 180 },
+        width: 600,
+        height: 450
     },
     { 
         id: 'about-me', 

@@ -1,0 +1,144 @@
+.notepad-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: #c0c0c0;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    margin: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+}
+
+/* Menu Bar */
+.notepad-menu-bar {
+    display: flex;
+    background-color: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 2px 0;
+    position: relative;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    color: #000;
+
+    &:hover {
+        background-color: #000080;
+        color: #fff;
+    }
+
+    &:active {
+        background-color: #000080;
+        color: #fff;
+    }
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff #000 #000 #fff;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.menu-dropdown-item {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 6px 20px;
+    text-align: left;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    color: #000;
+
+    &:hover {
+        background-color: #000080;
+        color: #fff;
+    }
+
+    &:active {
+        background-color: #000080;
+        color: #fff;
+    }
+}
+
+/* Text Area */
+.notepad-textarea {
+    flex: 1;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    resize: none;
+    background-color: #fff;
+    color: #000;
+    overflow: auto;
+
+    &::placeholder {
+        color: #808080;
+    }
+
+    /* Custom scrollbar for Windows 95 look */
+    &::-webkit-scrollbar {
+        width: 16px;
+        height: 16px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #c0c0c0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border: 2px solid;
+        border-color: #fff #000 #000 #fff;
+
+        &:hover {
+            background: #b0b0b0;
+        }
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: #c0c0c0;
+    }
+}
+
+/* Status Bar */
+.notepad-status-bar {
+    background-color: #c0c0c0;
+    border-top: 2px solid;
+    border-color: #808080 #fff #fff #808080;
+    padding: 4px 8px;
+    font-size: 11px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 22px;
+
+    span {
+        padding: 2px 8px;
+        border: 1px solid;
+        border-color: #808080 #fff #fff #808080;
+        background-color: #c0c0c0;
+    }
+}
+
