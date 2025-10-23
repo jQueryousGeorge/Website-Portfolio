@@ -1,0 +1,85 @@
+.calc-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    background-color: #c0c0c0;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    padding: 6px;
+}
+
+.calc-menu-bar {
+    display: flex;
+    gap: 12px;
+    color: #000;
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.menu-label {
+    padding: 2px 4px;
+}
+
+.calc-display {
+    border: 2px solid;
+    border-left-color: #808080;
+    border-top-color: #808080;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    background-color: #e6e6e6;
+    height: 34px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 4px 6px;
+}
+
+.calc-display-text {
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+}
+
+.calc-keypad {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    flex: 1;
+    min-height: 0;
+}
+
+.calc-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+}
+
+.calc-btn {
+    height: 34px;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-left-color: #ffffff;
+    border-top-color: #ffffff;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    cursor: pointer;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    font-size: 12px;
+    color: #000080; /* blue numbers like Win95 */
+    user-select: none;
+
+    &:active {
+        border-left-color: #808080;
+        border-top-color: #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
+    }
+
+    &.op, &.func, &.equals, &.control, &.memory {
+        color: #ff0000; /* red labels for ops like classic calc */
+    }
+
+    &.hidden { visibility: hidden; }
+}
+
+

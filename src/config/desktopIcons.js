@@ -7,6 +7,7 @@ import Contact from '../components/portfolio_sections/Contact'
 import Projects from '../components/portfolio_sections/Projects'
 import InternetExplorer from '../components/apps/InternetExplorer/InternetExplorer'
 import Notepad from '../components/apps/Notepad/Notepad'
+import Calculator from '../components/apps/Calculator/Calculator'
 import myComputerIcon from '../assets/icons/my_computer.ico';
 import recycleBinIcon from '../assets/icons/recycle_bin_with_paper.ico';
 import aboutMeIcon from '../assets/icons/about_me_icon.ico';
@@ -14,6 +15,7 @@ import contactIcon from '../assets/icons/mailbox_with_phone.ico';
 import projectsIcon from '../assets/icons/user_with_computer.ico';
 import ieIcon from '../assets/icons/internet_explorer.ico';
 import notepadIcon from '../assets/icons/notepad.ico';
+import calculatorIcon from '../assets/icons/my_computer.ico'; // placeholder, replace with calculator icon if available
 
 // Set the icon images from the import statements above:
 const ICON_IMAGES = {
@@ -23,7 +25,8 @@ const ICON_IMAGES = {
     contact: contactIcon,
     projects: projectsIcon,
     internetExplorer: ieIcon,
-    notepad: notepadIcon
+    notepad: notepadIcon,
+    calculator: calculatorIcon
 };
 
 // Configure each desktop icon with metadata:
@@ -36,6 +39,17 @@ export const initialDesktopIcons = [
         contentType: 'text', 
         content: 'Recycle Bin is empty',
         defaultPosition: { x: 100, y: 260 }
+    },
+    { 
+        id: 'calculator', 
+        label: 'Calculator',
+        image: ICON_IMAGES.calculator,
+        windowId: 'calculatorWindow', 
+        contentType: 'component', 
+        contentComponent: Calculator,
+        defaultPosition: { x: 80, y: 120 },
+        width: 320,
+        height: 380
     },
     { 
         id: 'my-computer', 

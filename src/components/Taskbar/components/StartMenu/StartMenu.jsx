@@ -7,6 +7,7 @@ import InternetExplorer from '../../../apps/InternetExplorer/InternetExplorer';
 import ieIcon from '../../../../assets/icons/internet_explorer.ico';
 import Notepad from '../../../apps/Notepad/Notepad';
 import notepadIcon from '../../../../assets/icons/notepad.ico';
+import Calculator from '../../../apps/Calculator/Calculator';
 
 const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
     const [activeSubmenuByLevel, setActiveSubmenuByLevel] = useState({});
@@ -132,6 +133,21 @@ const StartMenu = ({ isOpen, onClose, onOpenWindow }) => {
                 defaultPosition: { x: 100, y: 180 },
                 width: 600,
                 height: 450
+            });
+            onClose();
+            return;
+        }
+
+        // Handle Calculator item
+        if (item.id === 'calculator') {
+            onOpenWindow({
+                id: 'calculatorWindow',
+                title: 'Calculator',
+                contentType: 'component',
+                contentComponent: Calculator,
+                defaultPosition: { x: 120, y: 120 },
+                width: 320,
+                height: 380
             });
             onClose();
             return;
