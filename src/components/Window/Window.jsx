@@ -80,7 +80,7 @@ const Window = ({
         width: isMaximized ? '100%' : `${width}px`,
         height: isMaximized ? 'calc(100% - 30px)' : `${height}px`,
         zIndex: zIndex,
-        display: isMinimized ? 'none' : 'block'
+        ...(isMinimized ? { display: 'none' } : {})
     };
 
     return (

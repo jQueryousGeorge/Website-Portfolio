@@ -170,8 +170,9 @@
 
 .window-content {
     flex: 1;
+    min-height: 0;
     padding: 8px;
-    overflow: auto;
+    overflow: hidden;
     background-color: #c0c0c0;
     border: 2px solid;
     border-top-color: #808080;
@@ -181,6 +182,8 @@
     margin: 2px;
     box-sizing: border-box;
     position: relative;
+    display: flex;
+    flex-direction: column;
     
     // Windows 95 content background pattern
     &::before {
@@ -195,7 +198,7 @@
         z-index: 0;
     }
     
-    // Make sure content is above the pattern
+    // Ensure content is above the pattern only (do not force flex here)
     & > * {
         position: relative;
         z-index: 1;
@@ -207,6 +210,8 @@
         font-family: 'MS Sans Serif', sans-serif;
         font-size: 11px;
         line-height: 1.6;
+        overflow: auto;
+        flex: 1;
     }
     
     // Scrollbar styling for Windows 95 look

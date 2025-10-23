@@ -112,11 +112,10 @@ const InternetExplorer = () => {
         <div
             className="height-100"
             style={{
-                height: '100%',
+                flex: 1,
+                minHeight: 0,
                 display: 'flex',
-                flexDirection: 'column',
-                margin: '-10px',
-                width: 'calc(100% + 20px)'
+                flexDirection: 'column'
             }}
         >
             <div className="ie-nav-bar">
@@ -170,10 +169,9 @@ const InternetExplorer = () => {
                 title="Internet Explorer"
                 style={{
                     flex: 1,
+                    minHeight: 0,
                     border: 'none',
                     width: '100%',
-                    height: '100%',
-                    minHeight: '600px',
                     display: 'block'
                 }}
             />

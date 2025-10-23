@@ -1,6 +1,9 @@
 @import '../../styles/variables';
 
 .portfolio-section {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
     padding: 16px;
     font-family: 'MS Sans Serif', sans-serif;
     font-size: 11px;
