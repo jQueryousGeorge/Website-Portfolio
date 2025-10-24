@@ -43,6 +43,44 @@
     }
 }
 
+.taskbar-pins {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 4px;
+    padding: 0 4px;
+}
+
+.taskbar-pin-button {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-left-color: #ffffff;
+    border-top-color: #ffffff;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    cursor: pointer;
+    padding: 0;
+}
+
+.taskbar-pin-button:active {
+    border-left-color: #808080;
+    border-top-color: #808080;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+.taskbar-pin-button img {
+    width: 16px;
+    height: 16px;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
 .taskbar-window-button {
     display: flex;
     align-items: center;

@@ -3,11 +3,13 @@ import './AppsFolder.scss';
 import Calculator from '../Calculator/Calculator';
 import Notepad from '../Notepad/Notepad';
 import WindowsExplorer from '../WindowsExplorer/WindowsExplorer';
+import InternetExplorer from '../InternetExplorer/InternetExplorer';
 import calculatorIcon from '../../../assets/icons/calculator.ico';
 import notepadIcon from '../../../assets/icons/notepad.ico';
 import windowsExplorerIcon from '../../../assets/icons/windows_explorer.ico';
+import ieIcon from '../../../assets/icons/internet_explorer.ico';
 
-const APP_SHORTCUTS = [
+export const APPS_FOLDER_SHORTCUTS = [
     {
         id: 'calculatorWindow',
         name: 'Calculator',
@@ -35,6 +37,15 @@ const APP_SHORTCUTS = [
         height: 480,
         defaultPosition: { x: 200, y: 120 }
     }
+    ,{
+        id: 'internetExplorerWindow',
+        name: 'Internet Explorer',
+        icon: ieIcon,
+        component: InternetExplorer,
+        width: 800,
+        height: 600,
+        defaultPosition: { x: 50, y: 50 }
+    }
 ];
 
 const AppsFolder = ({ onOpenWindow }) => {
@@ -54,7 +65,7 @@ const AppsFolder = ({ onOpenWindow }) => {
 
     return (
         <div className="apps-folder">
-            {APP_SHORTCUTS.map(s => (
+            {APPS_FOLDER_SHORTCUTS.map(s => (
                 <div key={s.id} className="apps-item" onDoubleClick={() => openShortcut(s)} title={s.name}>
                     <div className="icon-wrap"><img src={s.icon} alt={s.name} /></div>
                     <div className="label">{s.name}</div>

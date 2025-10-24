@@ -38,6 +38,15 @@ const ICON_IMAGES = {
 // Configure each desktop icon with metadata:
 export const initialDesktopIcons = [
     { 
+        id: 'my-computer', 
+        label: 'My Computer',
+        image: ICON_IMAGES.computer, 
+        windowId: 'myComputerWindow', 
+        contentType: 'text', 
+        content: 'My Computer Contents',
+        defaultPosition: { x: 100, y: 100 }
+    },
+    { 
         id: 'recycle-bin', 
         label: 'Recycle Bin',
         image: ICON_IMAGES.recycleBin, 
@@ -56,26 +65,6 @@ export const initialDesktopIcons = [
         defaultPosition: { x: 200, y: 120 },
         width: 500,
         height: 400
-    },
-    { 
-        id: 'my-computer', 
-        label: 'My Computer',
-        image: ICON_IMAGES.computer, 
-        windowId: 'myComputerWindow', 
-        contentType: 'text', 
-        content: 'My Computer Contents',
-        defaultPosition: { x: 100, y: 100 }
-    },
-    { 
-        id: 'internet-explorer', 
-        label: 'Internet Explorer',
-        image: ICON_IMAGES.internetExplorer,
-        windowId: 'internetExplorerWindow', 
-        contentType: 'component', 
-        contentComponent: InternetExplorer,
-        defaultPosition: { x: 50, y: 50 },
-        width: 800,
-        height: 600
     },
     { 
         id: 'about-me', 

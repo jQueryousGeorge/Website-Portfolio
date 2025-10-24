@@ -4,6 +4,10 @@ import StartButton from "./components/StartButton/StartButton";
 import StartMenu from "./components/StartMenu/StartMenu";
 import SystemTray from "./components/SystemTray/SystemTray";
 import wmvIcon from '../../assets/icons/windows_media_viewer.ico';
+import ieIcon from '../../assets/icons/internet_explorer.ico';
+import windowsExplorerIcon from '../../assets/icons/windows_explorer.ico';
+import InternetExplorer from '../apps/InternetExplorer/InternetExplorer';
+import WindowsExplorer from '../apps/WindowsExplorer/WindowsExplorer';
 
 const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWindow, activeWindowId }) => {
     const [startMenuOpen, setStartMenuOpen] = useState(false);
@@ -26,6 +30,32 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
         setStartMenuOpen(!startMenuOpen);
     };
 
+    const openPinnedIE = () => {
+        onOpenWindow({
+            id: 'internetExplorerWindow',
+            title: 'Internet Explorer',
+            icon: ieIcon,
+            contentType: 'component',
+            contentComponent: InternetExplorer,
+            defaultPosition: { x: 80, y: 80 },
+            width: 800,
+            height: 600
+        });
+    };
+
+    const openPinnedExplorer = () => {
+        onOpenWindow({
+            id: 'windowsExplorerWindow',
+            title: 'Windows Explorer',
+            icon: windowsExplorerIcon,
+            contentType: 'component',
+            contentComponent: WindowsExplorer,
+            defaultPosition: { x: 120, y: 120 },
+            width: 680,
+            height: 480
+        });
+    };
+
     return (
         <>
             <StartMenu 
@@ -40,6 +70,15 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
             <div className="taskbar-bottom">
                 <div className="taskbar-startbutton">
                     <StartButton onClick={handleStartButtonClick} isActive={startMenuOpen} />
+                </div>
+
+                <div className="taskbar-pins">
+                    <button className="taskbar-pin-button" title="Internet Explorer" onClick={openPinnedIE}>
+                        <img src={ieIcon} alt="IE" />
+                    </button>
+                    <button className="taskbar-pin-button" title="Windows Explorer" onClick={openPinnedExplorer}>
+                        <img src={windowsExplorerIcon} alt="Explorer" />
+                    </button>
                 </div>
 
                 <div className="taskbar-windows">

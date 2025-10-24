@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './SystemTray.scss';
+import internetGif from '../../../../assets/icons/internet_dialup.gif';
+import soundIcon from '../../../../assets/icons/sound_icon.ico';
+import batteryIcon from '../../../../assets/icons/battery_icon.ico';
 
 const SystemTray = () => {
     const [currentTime, setCurrentTime] = useState('');
@@ -27,6 +30,9 @@ const SystemTray = () => {
 
     return (
         <div className="system-tray-right">
+            <img className="tray-icon" src={soundIcon} alt="Sound Activity Icon" />
+            <img className="tray-gif" src={internetGif} alt="Internet Activity" />
+            <img className="tray-icon" src={batteryIcon} alt="Battery Indicator Icon" />
             <div className="tray-clock">
                 {currentTime}
             </div>
