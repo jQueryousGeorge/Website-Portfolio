@@ -11,7 +11,7 @@ import WindowsExplorer from '../apps/WindowsExplorer/WindowsExplorer';
 
 const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWindow, onCloseWindow, activeWindowId }) => {
     const [startMenuOpen, setStartMenuOpen] = useState(false);
-    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, windowId: null, anchor: null });
+    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, windowId: null, anchor: null, arrowOffset: 0 });
     const menuRef = useRef(null);
     
     const handleTaskbarButtonClick = (windowId) => {
@@ -40,12 +40,13 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
             x: 0,
             y: 0,
             windowId,
-            anchor: { left: r.left, top: r.top, width: r.width, height: r.height }
+            anchor: { left: r.left, top: r.top, width: r.width, height: r.height },
+            arrowOffset: 0
         });
     };
 
     const closeContextMenu = () => {
-        setContextMenu({ visible: false, x: 0, y: 0, windowId: null, anchor: null });
+        setContextMenu({ visible: false, x: 0, y: 0, windowId: null, anchor: null, arrowOffset: 0 });
     };
 
     const handleContextMinimizeOrRestore = () => {
@@ -79,10 +80,29 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
         let desiredTop = contextMenu.anchor.top - menuRect.height - 6;
         desiredTop = Math.max(margin, desiredTop);
 
-        if (desiredLeft !== contextMenu.x || desiredTop !== contextMenu.y) {
-            setContextMenu(prev => ({ ...prev, x: desiredLeft, y: desiredTop }));
-        }
+        // Compute arrow offset relative to menu
+        const anchorCenter = contextMenu.anchor.left + contextMenu.anchor.width / 2;
+        const arrowOffset = anchorCenter - desiredLeft;
+
+        // Only update when needed; use prev to avoid dependency on x/y
+        setContextMenu(prev => {
+            if (!prev.visible) return prev;
+            if (prev.x === desiredLeft && prev.y === desiredTop && prev.arrowOffset === arrowOffset) return prev;
+            return { ...prev, x: desiredLeft, y: desiredTop, arrowOffset };
+        });
     }, [contextMenu.visible, contextMenu.anchor]);
+
+    // Close context menu on Escape key
+    useEffect(() => {
+        if (!contextMenu.visible) return;
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                setContextMenu(prev => prev.visible ? { ...prev, visible: false, x: 0, y: 0, windowId: null, anchor: null, arrowOffset: 0 } : prev);
+            }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [contextMenu.visible]);
 
     const openPinnedIE = () => {
         onOpenWindow({
@@ -161,7 +181,7 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
                     <div className="taskbar-contextmenu-overlay" onMouseDown={closeContextMenu} />
                     <div
                         className="taskbar-contextmenu"
-                        style={{ left: `${contextMenu.x}px`, top: `${contextMenu.y}px` }}
+                        style={{ left: `${contextMenu.x}px`, top: `${contextMenu.y}px`, '--arrow-offset': `${contextMenu.arrowOffset || 0}px` }}
                         ref={menuRef}
                         onMouseDown={(e) => e.stopPropagation()}
                     >
