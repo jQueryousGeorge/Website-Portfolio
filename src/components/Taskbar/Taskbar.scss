@@ -20,7 +20,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 2px;
+    padding: 0; // remove gap next to pinned apps
 }
 
 .taskbar-windows {
@@ -48,30 +48,25 @@
     align-items: center;
     height: 100%;
     gap: 4px;
-    padding: 0 4px;
+    padding: 0 4px; // subtle breathing room
+    margin: 0 4px 0 0; // no gap on the left (next to Start)
 }
 
 .taskbar-pin-button {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #c0c0c0;
-    border: 2px solid;
-    border-left-color: #ffffff;
-    border-top-color: #ffffff;
-    border-right-color: #808080;
-    border-bottom-color: #808080;
+    background: transparent;
+    border: none;
     cursor: pointer;
     padding: 0;
 }
 
 .taskbar-pin-button:active {
-    border-left-color: #808080;
-    border-top-color: #808080;
-    border-right-color: #ffffff;
-    border-bottom-color: #ffffff;
+    outline: 1px solid #000080; // blue highlight like Win95 selection
+    outline-offset: -1px;
 }
 
 .taskbar-pin-button img {
