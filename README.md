@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+g# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## First-time Setup
+
+Before running the development server, install the project dependencies:
+
+```bash
+npm i
+```
+
+Then start the app:
+
+```bash
+npm start
+```
 
 ## Available Scripts
 
