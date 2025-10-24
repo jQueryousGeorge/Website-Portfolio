@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@use '../../styles/variables' as vars;
 
 .taskbar-bottom {
     position: fixed;
@@ -227,14 +227,28 @@
     border: none;
     padding: 4px 8px;
     cursor: pointer;
+    color: black;
+    height: 22px;
+    display: flex;
+    align-items: center;
 }
 
-.taskbar-contextmenu .context-item:hover {
-    background-color: #e0e0e0;
+.taskbar-contextmenu .context-item:hover,
+.taskbar-contextmenu .context-item:focus-visible,
+.taskbar-contextmenu .context-item.active {
+    background-color: vars.$title-bar-active;
+    color: white;
 }
 
 .taskbar-contextmenu .context-separator {
     height: 1px;
-    background-color: #808080;
-    margin: 4px 0;
+    margin: 2px 2px;
+    background: linear-gradient(
+        to right,
+        vars.$button-shadow 0%,
+        vars.$button-shadow 50%,
+        vars.$button-highlight 50%,
+        vars.$button-highlight 100%
+    );
+    background-size: 2px 1px;
 }

@@ -1,5 +1,5 @@
 // Windows 95 base styles
-@import './variables';
+@use './variables' as vars;
 
 // Windows 95 Font Stack
 @font-face {
@@ -13,10 +13,10 @@
 @mixin win95-border-outset {
   border-style: solid;
   border-width: 2px;
-  border-left-color: $button-highlight;
-  border-top-color: $button-highlight;
-  border-right-color: $button-dark-shadow;
-  border-bottom-color: $button-dark-shadow;
+  border-left-color: vars.$button-highlight;
+  border-top-color: vars.$button-highlight;
+  border-right-color: vars.$button-dark-shadow;
+  border-bottom-color: vars.$button-dark-shadow;
 }
 
 @mixin win95-border-inset {
@@ -29,7 +29,7 @@
 }
 
 @mixin win95-button {
-  background-color: $window-gray;
+  background-color: vars.$window-gray;
   @include win95-border-outset;
   font-family: 'MS Sans Serif', sans-serif;
   font-size: 11px;
@@ -43,7 +43,7 @@
   }
   
   &:focus {
-    outline: 1px dotted $button-dark-shadow;
+    outline: 1px dotted vars.$button-dark-shadow;
     outline-offset: -4px;
   }
 }

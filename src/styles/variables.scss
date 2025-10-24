@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Windows 95 Colors
 $desktop-teal: #008080;
 $desktop-background: $desktop-teal; // Added for Desktop.scss
@@ -13,4 +15,6 @@ $icon-text-white: #ffffff;
 $window-background-color: #FFFFFF; // Added for Window component body
 $title-bar-inactive: #808080; // Added for inactive window title bars
 $highlight-blue: $title-bar-active; // For hover states, same as active title bar
-$window-gray-dark: darken($window-gray, 15%); // For pressed-in elements like active taskbar buttons
+$window-gray-dark: color.adjust($window-gray, $lightness: -15%); // For pressed-in elements like active taskbar buttons
+
+

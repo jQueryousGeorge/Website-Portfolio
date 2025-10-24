@@ -1,4 +1,4 @@
-@import '../../../../styles/_variables.scss';
+@use '../../../../styles/variables' as vars;
 
 .desktop-icon {
     width: 75px;
@@ -28,7 +28,7 @@
         color: white; // Desktop icon labels are typically white
         background-color: transparent; // Usually transparent background
         padding: 1px 3px;
-        text-shadow: 1px 1px 1px $desktop-background; // For a slight shadow based on background
+        text-shadow: 1px 1px 1px vars.$desktop-background; // For a slight shadow based on background
     }
 
     &:hover {
@@ -39,9 +39,9 @@
 
     // Future: selected state styling
     // &.selected .icon-label {
-    //   background-color: $highlight-blue;
+    //   background-color: vars.$highlight-blue;
     //   color: white;
     //   // Add border around label for selection
-    //   border: 1px dotted $button-highlight; // Or a specific selection color
+    //   border: 1px dotted vars.$button-highlight; // Or a specific selection color
     // }
 }

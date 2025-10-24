@@ -1,4 +1,4 @@
-@import '../../../../styles/variables';
+@use '../../../../styles/variables' as vars;
 
 .start-menu-overlay {
     position: fixed;
@@ -11,12 +11,12 @@
     bottom: 30px;
     left: 0;
     width: 200px;
-    background-color: $window-gray;
+    background-color: vars.$window-gray;
     border: 2px solid;
-    border-left-color: $button-highlight;
-    border-top-color: $button-highlight;
-    border-right-color: $button-dark-shadow;
-    border-bottom-color: $button-dark-shadow;
+    border-left-color: vars.$button-highlight;
+    border-top-color: vars.$button-highlight;
+    border-right-color: vars.$button-dark-shadow;
+    border-bottom-color: vars.$button-dark-shadow;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     z-index: 9999;
     display: flex;
@@ -51,7 +51,7 @@
 .start-menu-content {
     flex: 1;
     padding: 2px;
-    background-color: $window-gray;
+    background-color: vars.$window-gray;
 }
 
 .menu-item {
@@ -63,7 +63,7 @@
     height: 22px;
     
     &:hover, &.active {
-        background-color: $title-bar-active;
+        background-color: vars.$title-bar-active;
         color: white;
         
         .menu-icon {
@@ -121,10 +121,10 @@
     margin: 2px 2px;
     background: linear-gradient(
         to right,
-        $button-shadow 0%,
-        $button-shadow 50%,
-        $button-highlight 50%,
-        $button-highlight 100%
+        vars.$button-shadow 0%,
+        vars.$button-shadow 50%,
+        vars.$button-highlight 50%,
+        vars.$button-highlight 100%
     );
     background-size: 2px 1px;
 }
@@ -134,12 +134,12 @@
     left: 100%;
     top: -2px;
     min-width: 150px;
-    background-color: $window-gray;
+    background-color: vars.$window-gray;
     border: 2px solid;
-    border-left-color: $button-highlight;
-    border-top-color: $button-highlight;
-    border-right-color: $button-dark-shadow;
-    border-bottom-color: $button-dark-shadow;
+    border-left-color: vars.$button-highlight;
+    border-top-color: vars.$button-highlight;
+    border-right-color: vars.$button-dark-shadow;
+    border-bottom-color: vars.$button-dark-shadow;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     padding: 2px;
     z-index: 10000;

@@ -1,4 +1,4 @@
-@import 'src/styles/variables.scss';
+@use 'src/styles/variables' as vars;
 
 .system-tray-right {
     display: flex;
@@ -31,7 +31,7 @@
     height: 20px;
     line-height: 20px;
     border: 1px solid;
-    border-color: $button-shadow $button-highlight $button-highlight $button-shadow;
-    box-shadow: inset 1px 1px $button-dark-shadow;
+    border-color: vars.$button-shadow vars.$button-highlight vars.$button-highlight vars.$button-shadow;
+    box-shadow: inset 1px 1px vars.$button-dark-shadow;
     margin-left: 6px;
 }

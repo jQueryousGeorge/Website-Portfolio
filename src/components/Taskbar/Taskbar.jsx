@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import "./Taskbar.scss";
 import StartButton from "./components/StartButton/StartButton";
 import StartMenu from "./components/StartMenu/StartMenu";
@@ -13,6 +13,9 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
     const [startMenuOpen, setStartMenuOpen] = useState(false);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, windowId: null, anchor: null, arrowOffset: 0 });
     const menuRef = useRef(null);
+    const itemRefs = useRef([]);
+    const [focusedIndex, setFocusedIndex] = useState(0);
+    const focusedIndexRef = useRef(0);
     
     const handleTaskbarButtonClick = (windowId) => {
         const window = openWindows[windowId];
@@ -43,27 +46,29 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
             anchor: { left: r.left, top: r.top, width: r.width, height: r.height },
             arrowOffset: 0
         });
+        setFocusedIndex(0);
     };
 
-    const closeContextMenu = () => {
+    const closeContextMenu = useCallback(() => {
         setContextMenu({ visible: false, x: 0, y: 0, windowId: null, anchor: null, arrowOffset: 0 });
-    };
+        setFocusedIndex(0);
+    }, []);
 
-    const handleContextMinimizeOrRestore = () => {
+    const handleContextMinimizeOrRestore = useCallback(() => {
         const id = contextMenu.windowId;
         if (!id) return;
         const win = openWindows[id];
         if (!win) return;
         onMinimizeWindow(id, !win.isMinimized);
         closeContextMenu();
-    };
+    }, [contextMenu.windowId, openWindows, onMinimizeWindow, closeContextMenu]);
 
-    const handleContextClose = () => {
+    const handleContextClose = useCallback(() => {
         const id = contextMenu.windowId;
         if (!id) return;
         if (onCloseWindow) onCloseWindow(id);
         closeContextMenu();
-    };
+    }, [contextMenu.windowId, onCloseWindow, closeContextMenu]);
 
     // Position the context menu above the clicked taskbar button, clamped horizontally
     useEffect(() => {
@@ -92,17 +97,45 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
         });
     }, [contextMenu.visible, contextMenu.anchor]);
 
-    // Close context menu on Escape key
+    // Close context menu on Escape key and handle ArrowUp/Down/Enter navigation
     useEffect(() => {
         if (!contextMenu.visible) return;
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') {
                 setContextMenu(prev => prev.visible ? { ...prev, visible: false, x: 0, y: 0, windowId: null, anchor: null, arrowOffset: 0 } : prev);
-            }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                setFocusedIndex(prev => (prev + 1) % 2);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                setFocusedIndex(prev => (prev - 1 + 2) % 2);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                const idx = focusedIndexRef.current;
+                if (idx === 0) {
+                    handleContextMinimizeOrRestore();
+                } else if (idx === 1) {
+                    handleContextClose();
+                }
+             }
         };
         document.addEventListener('keydown', handleKeyDown);
         return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [contextMenu.visible]);
+    }, [contextMenu.visible, handleContextMinimizeOrRestore, handleContextClose]);
+
+    // Keep live ref of focused index for Enter handler
+    useEffect(() => {
+        focusedIndexRef.current = focusedIndex;
+    }, [focusedIndex]);
+
+    // Focus the highlighted item for accessibility
+    useEffect(() => {
+        if (!contextMenu.visible) return;
+        const el = itemRefs.current[focusedIndex];
+        if (el && typeof el.focus === 'function') {
+            el.focus();
+        }
+    }, [contextMenu.visible, focusedIndex]);
 
     const openPinnedIE = () => {
         onOpenWindow({
@@ -185,11 +218,25 @@ const Taskbar = ({ openWindows = {}, onOpenWindow, onWindowFocus, onMinimizeWind
                         ref={menuRef}
                         onMouseDown={(e) => e.stopPropagation()}
                     >
-                        <button className="context-item" onClick={handleContextMinimizeOrRestore}>
+                        <button
+                            className={`context-item ${focusedIndex === 0 ? 'active' : ''}`}
+                            onClick={handleContextMinimizeOrRestore}
+                            ref={(el) => itemRefs.current[0] = el}
+                            tabIndex={-1}
+                            onMouseEnter={() => setFocusedIndex(0)}
+                        >
                             {openWindows[contextMenu.windowId]?.isMinimized ? 'Restore' : 'Minimize'}
                         </button>
                         <div className="context-separator" />
-                        <button className="context-item" onClick={handleContextClose}>Close</button>
+                        <button
+                            className={`context-item ${focusedIndex === 1 ? 'active' : ''}`}
+                            onClick={handleContextClose}
+                            ref={(el) => itemRefs.current[1] = el}
+                            tabIndex={-1}
+                            onMouseEnter={() => setFocusedIndex(1)}
+                        >
+                            Close
+                        </button>
                     </div>
                 </>
             )}

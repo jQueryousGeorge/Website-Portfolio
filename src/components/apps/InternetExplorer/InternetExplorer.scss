@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@use '../../../styles/variables' as vars;
 
 // Remove .ie-container entirely since you're using inline styles
 // and your JSX uses className="height-100" anyway
@@ -7,8 +7,8 @@
     display: flex;
     align-items: center;
     padding: 4px 8px;
-    background-color: $window-gray;
-    border-bottom: 1px solid $button-shadow;
+    background-color: vars.$window-gray;
+    border-bottom: 1px solid vars.$button-shadow;
     gap: 4px;
     height: 32px;
     flex-shrink: 0;
@@ -17,12 +17,12 @@
 .ie-nav-button {
     width: 28px;
     height: 24px;
-    background-color: $window-gray;
+    background-color: vars.$window-gray;
     border: 2px solid;
-    border-left-color: $button-highlight;
-    border-top-color: $button-highlight;
-    border-right-color: $button-dark-shadow;
-    border-bottom-color: $button-dark-shadow;
+    border-left-color: vars.$button-highlight;
+    border-top-color: vars.$button-highlight;
+    border-right-color: vars.$button-dark-shadow;
+    border-bottom-color: vars.$button-dark-shadow;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -36,16 +36,16 @@
     }
 
     &:active:not(:disabled) {
-        border-left-color: $button-dark-shadow;
-        border-top-color: $button-dark-shadow;
-        border-right-color: $button-highlight;
-        border-bottom-color: $button-highlight;
+        border-left-color: vars.$button-dark-shadow;
+        border-top-color: vars.$button-dark-shadow;
+        border-right-color: vars.$button-highlight;
+        border-bottom-color: vars.$button-highlight;
         transform: translate(1px, 1px);
     }
 
     &:disabled {
         cursor: not-allowed;
-        color: $button-shadow;
+        color: vars.$button-shadow;
     }
 }
 
@@ -54,29 +54,29 @@
     height: 24px;
     padding: 2px 6px;
     border: 2px solid;
-    border-top-color: $button-shadow;
-    border-left-color: $button-shadow;
-    border-right-color: $button-highlight;
-    border-bottom-color: $button-highlight;
+    border-top-color: vars.$button-shadow;
+    border-left-color: vars.$button-shadow;
+    border-right-color: vars.$button-highlight;
+    border-bottom-color: vars.$button-highlight;
     background-color: white;
     font-family: 'MS Sans Serif', sans-serif;
     font-size: 11px;
     outline: none;
 
     &:focus {
-        border-color: $title-bar-active;
+        border-color: vars.$title-bar-active;
     }
 }
 
 .ie-go-button {
     width: 40px;
     height: 24px;
-    background-color: $window-gray;
+    background-color: vars.$window-gray;
     border: 2px solid;
-    border-left-color: $button-highlight;
-    border-top-color: $button-highlight;
-    border-right-color: $button-dark-shadow;
-    border-bottom-color: $button-dark-shadow;
+    border-left-color: vars.$button-highlight;
+    border-top-color: vars.$button-highlight;
+    border-right-color: vars.$button-dark-shadow;
+    border-bottom-color: vars.$button-dark-shadow;
     cursor: pointer;
     font-family: 'MS Sans Serif', sans-serif;
     font-size: 11px;
@@ -87,10 +87,10 @@
     }
 
     &:active {
-        border-left-color: $button-dark-shadow;
-        border-top-color: $button-dark-shadow;
-        border-right-color: $button-highlight;
-        border-bottom-color: $button-highlight;
+        border-left-color: vars.$button-dark-shadow;
+        border-top-color: vars.$button-dark-shadow;
+        border-right-color: vars.$button-highlight;
+        border-bottom-color: vars.$button-highlight;
         transform: translate(1px, 1px);
     }
 }

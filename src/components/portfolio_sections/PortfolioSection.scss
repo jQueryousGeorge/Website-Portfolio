@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@use '../../styles/variables' as vars;
 
 .portfolio-section {
     flex: 1;
@@ -15,7 +15,7 @@
         font-weight: bold;
         margin: 0 0 12px 0;
         padding-bottom: 4px;
-        border-bottom: 1px solid $button-shadow;
+        border-bottom: 1px solid vars.$button-shadow;
     }
     
     h3, h4 {
@@ -39,12 +39,12 @@
     
     // Windows 95 style sections
     .section-group {
-        background-color: $window-gray;
+        background-color: vars.$window-gray;
         border: 1px solid;
-        border-top-color: $button-shadow;
-        border-left-color: $button-shadow;
-        border-right-color: $button-highlight;
-        border-bottom-color: $button-highlight;
+        border-top-color: vars.$button-shadow;
+        border-left-color: vars.$button-shadow;
+        border-right-color: vars.$button-highlight;
+        border-bottom-color: vars.$button-highlight;
         padding: 8px;
         margin: 8px 0;
     }
@@ -70,7 +70,7 @@
         font-size: 10px;
         background-color: #f0f0f0;
         padding: 1px 3px;
-        border: 1px solid $button-shadow;
+        border: 1px solid vars.$button-shadow;
     }
     
     pre {
@@ -79,7 +79,7 @@
         background-color: #000000;
         color: #00FF00;
         padding: 8px;
-        border: 1px solid $button-shadow;
+        border: 1px solid vars.$button-shadow;
         overflow-x: auto;
         margin: 8px 0;
     }
@@ -88,10 +88,10 @@
     .project-card {
         background-color: white;
         border: 2px solid;
-        border-top-color: $button-shadow;
-        border-left-color: $button-shadow;
-        border-right-color: $button-highlight;
-        border-bottom-color: $button-highlight;
+        border-top-color: vars.$button-shadow;
+        border-left-color: vars.$button-shadow;
+        border-right-color: vars.$button-highlight;
+        border-bottom-color: vars.$button-highlight;
         padding: 12px;
         margin: 12px 0;
         
@@ -119,42 +119,42 @@
         width: 100%;
         padding: 2px 4px;
         border: 2px solid;
-        border-top-color: $button-shadow;
-        border-left-color: $button-shadow;
-        border-right-color: $button-highlight;
-        border-bottom-color: $button-highlight;
+        border-top-color: vars.$button-shadow;
+        border-left-color: vars.$button-shadow;
+        border-right-color: vars.$button-highlight;
+        border-bottom-color: vars.$button-highlight;
         background-color: white;
         font-family: 'MS Sans Serif', sans-serif;
         font-size: 11px;
         
         &:focus {
-            outline: 1px dotted $button-dark-shadow;
+            outline: 1px dotted vars.$button-dark-shadow;
             outline-offset: -3px;
         }
     }
     
     button {
-        background-color: $window-gray;
+        background-color: vars.$window-gray;
         border: 2px solid;
-        border-left-color: $button-highlight;
-        border-top-color: $button-highlight;
-        border-right-color: $button-dark-shadow;
-        border-bottom-color: $button-dark-shadow;
+        border-left-color: vars.$button-highlight;
+        border-top-color: vars.$button-highlight;
+        border-right-color: vars.$button-dark-shadow;
+        border-bottom-color: vars.$button-dark-shadow;
         padding: 4px 12px;
         font-family: 'MS Sans Serif', sans-serif;
         font-size: 11px;
         cursor: pointer;
         
         &:active {
-            border-left-color: $button-dark-shadow;
-            border-top-color: $button-dark-shadow;
-            border-right-color: $button-highlight;
-            border-bottom-color: $button-highlight;
+            border-left-color: vars.$button-dark-shadow;
+            border-top-color: vars.$button-dark-shadow;
+            border-right-color: vars.$button-highlight;
+            border-bottom-color: vars.$button-highlight;
             padding: 5px 11px 3px 13px;
         }
         
         &:focus {
-            outline: 1px dotted $button-dark-shadow;
+            outline: 1px dotted vars.$button-dark-shadow;
             outline-offset: -4px;
         }
     }

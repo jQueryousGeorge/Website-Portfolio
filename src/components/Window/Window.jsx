@@ -76,7 +76,7 @@ const Window = ({
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
         };
-    }, [isDragging, dragOffset]);
+    }, [isDragging, dragOffset, width, height]);
 
     // Handle double click on title bar to maximize/restore
     const handleTitleBarDoubleClick = () => {

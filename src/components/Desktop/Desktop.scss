@@ -1,7 +1,7 @@
-@import 'src/styles/variables';
+@use 'src/styles/variables' as vars;
 
 .desktop {
-    background-color: $desktop-teal;
+    background-color: vars.$desktop-teal;
     height: 100vh;
     width: 100vw;
     position: relative;
