@@ -131,6 +131,7 @@ function App() {
         onOpenWindow={handleOpenWindow}
         onWindowFocus={handleWindowFocus}
         onMinimizeWindow={handleMinimizeWindow}
+        onCloseWindow={handleCloseWindow}
         activeWindowId={activeWindowId}
       />
     </div>

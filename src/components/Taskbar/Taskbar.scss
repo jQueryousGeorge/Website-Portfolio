@@ -168,3 +168,48 @@
         font-family: 'MS Sans Serif', sans-serif;
     }
 }
+
+// Context menu overlay and menu
+.taskbar-contextmenu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+}
+
+.taskbar-contextmenu {
+    position: fixed;
+    z-index: 1002;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-left-color: #ffffff;
+    border-top-color: #ffffff;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    box-shadow: 0 2px 0 0 #000000;
+    min-width: 160px;
+    padding: 4px;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 11px;
+}
+
+.taskbar-contextmenu .context-item {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.taskbar-contextmenu .context-item:hover {
+    background-color: #e0e0e0;
+}
+
+.taskbar-contextmenu .context-separator {
+    height: 1px;
+    background-color: #808080;
+    margin: 4px 0;
+}

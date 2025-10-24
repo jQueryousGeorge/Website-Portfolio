@@ -49,10 +49,20 @@ const Window = ({
         const handleMouseMove = (e) => {
             if (!isDragging) return;
 
-            setPosition({
-                x: e.clientX - dragOffset.x,
-                y: e.clientY - dragOffset.y
-            });
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const winEl = windowRef.current;
+            const currentWidth = winEl ? winEl.offsetWidth : width;
+            const currentHeight = winEl ? winEl.offsetHeight : height;
+
+            let nextX = e.clientX - dragOffset.x;
+            let nextY = e.clientY - dragOffset.y;
+
+            // Clamp horizontally and vertically so the window stays on-screen
+            const clampedX = Math.max(0, Math.min(nextX, Math.max(0, viewportWidth - currentWidth)));
+            const clampedY = Math.max(0, Math.min(nextY, Math.max(0, viewportHeight - currentHeight)));
+
+            setPosition({ x: clampedX, y: clampedY });
         };
 
         const handleMouseUp = () => {
