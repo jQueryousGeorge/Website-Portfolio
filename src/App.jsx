@@ -4,6 +4,7 @@ import Desktop from './components/Desktop/Desktop';
 import Taskbar from './components/Taskbar/Taskbar';
 
 function App() {
+  const MAX_WINDOWS = 20;
   // Window management state - simplified structure
   const [openWindows, setOpenWindows] = useState({});
   const [activeWindowId, setActiveWindowId] = useState(null);
@@ -11,6 +12,11 @@ function App() {
 
   // Open a new window or focus an existing one
   const handleOpenWindow = useCallback((windowData) => {
+    // Prevent DoS by limiting the number of open windows
+    if (!openWindows[windowData.id] && Object.keys(openWindows).length >= MAX_WINDOWS) {
+      alert('Maximum number of windows reached');
+      return;
+    }
     setOpenWindows(prev => {
       // If window already exists, just focus it
       if (prev[windowData.id]) {
@@ -46,7 +52,7 @@ function App() {
     });
     
     setActiveWindowId(windowData.id);
-  }, [nextZIndex]);
+  }, [openWindows, nextZIndex]);
 
   // Close a window
   const handleCloseWindow = useCallback((windowId) => {
