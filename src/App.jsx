@@ -2,9 +2,9 @@ import React, { useState, useCallback } from 'react';
 import './App.css';
 import Desktop from './components/Desktop/Desktop';
 import Taskbar from './components/Taskbar/Taskbar';
+import { canOpenWindow, MAX_WINDOWS } from './utils/windowLimit';
 
 function App() {
-  const MAX_WINDOWS = 20;
   // Window management state - simplified structure
   const [openWindows, setOpenWindows] = useState({});
   const [activeWindowId, setActiveWindowId] = useState(null);
@@ -13,7 +13,7 @@ function App() {
   // Open a new window or focus an existing one
   const handleOpenWindow = useCallback((windowData) => {
     // Prevent DoS by limiting the number of open windows
-    if (!openWindows[windowData.id] && Object.keys(openWindows).length >= MAX_WINDOWS) {
+    if (!canOpenWindow(openWindows, windowData.id, MAX_WINDOWS)) {
       alert('Maximum number of windows reached');
       return;
     }
