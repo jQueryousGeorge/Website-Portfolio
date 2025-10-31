@@ -3,6 +3,7 @@ import './App.css';
 import Desktop from './components/Desktop/Desktop';
 import Taskbar from './components/Taskbar/Taskbar';
 import { canOpenWindow, MAX_WINDOWS } from './utils/windowLimit';
+// test
 
 function App() {
   // Window management state - simplified structure
