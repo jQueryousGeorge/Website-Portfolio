@@ -167,6 +167,9 @@ const InternetExplorer = () => {
                 src={url}
                 className="ie-iframe"
                 title="Internet Explorer"
+                sandbox='allow-scripts allow-same-origin allow-popups allow-forms'
+                referrerPolicy='no-referrer'
+                allow="accelerometer 'none'; camera 'none'; geolocation 'none'; microphone 'none'"
                 style={{
                     flex: 1,
                     minHeight: 0,
