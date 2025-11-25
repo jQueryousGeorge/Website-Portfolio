@@ -1,0 +1,254 @@
+.contact-container {
+  padding: 16px;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  font-size: 11px;
+  color: #000;
+  max-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+
+  .contact-header {
+    margin-bottom: 20px;
+    
+    h2 {
+      font-size: 13px;
+      font-weight: bold;
+      margin: 0 0 10px 0;
+      color: #000080;
+    }
+  }
+
+  // Alert boxes for success/error
+  .alert-box {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 2px solid;
+    position: relative;
+
+    &.success {
+      background: #c3fdb8;
+      border-color: #008000;
+
+      .alert-icon {
+        color: #008000;
+      }
+    }
+
+    &.error {
+      background: #ffb3b3;
+      border-color: #ff0000;
+
+      .alert-icon {
+        color: #ff0000;
+      }
+    }
+
+    .alert-icon {
+      font-size: 20px;
+      font-weight: bold;
+      margin-right: 10px;
+      line-height: 1;
+    }
+
+    .alert-content {
+      flex: 1;
+
+      strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 11px;
+      }
+    }
+
+    .alert-close {
+      background: none;
+      border: none;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      line-height: 1;
+      color: inherit;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .contact-form {
+    .form-row {
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      align-items: start;
+      gap: 8px;
+
+      label {
+        font-weight: bold;
+        font-size: 11px;
+        padding-top: 4px;
+        text-align: right;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 3px 4px;
+        border: 2px solid;
+        border-color: #7b7b7b #ffffff #ffffff #7b7b7b;
+        background: #ffffff;
+        font-family: 'MS Sans Serif', sans-serif;
+        font-size: 11px;
+        box-sizing: border-box;
+
+        &:focus {
+          outline: 1px dotted #000000;
+          outline-offset: -4px;
+        }
+
+        &:disabled {
+          background: #c0c0c0;
+          color: #808080;
+        }
+
+        &::placeholder {
+          color: #808080;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: 'MS Sans Serif', sans-serif;
+      }
+    }
+
+    .win95-button {
+      padding: 5px 16px;
+      min-width: 75px;
+      border: 2px solid;
+      border-color: #ffffff #000000 #000000 #ffffff;
+      background: #c0c0c0;
+      font-family: 'MS Sans Serif', sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+      margin-left: 78px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover:not(:disabled) {
+        background: #d4d4d4;
+      }
+
+      &:active:not(:disabled) {
+        border-color: #000000 #ffffff #ffffff #000000;
+        padding: 6px 15px 4px 17px;
+      }
+
+      &:disabled {
+        color: #808080;
+        cursor: not-allowed;
+        text-shadow: 1px 1px 0 #ffffff;
+      }
+
+      &.primary {
+        border: 3px solid;
+        border-color: #ffffff #000000 #000000 #ffffff;
+        
+        &:active:not(:disabled) {
+          border-color: #000000 #ffffff #ffffff #000000;
+        }
+      }
+    }
+  }
+
+  .contact-footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 2px solid #808080;
+
+    .footer-text {
+      margin: 0 0 8px 0;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;  // ← Center content
+      gap: 6px;  // ← Space between icon and text
+      padding: 4px 12px;
+      min-width: 80px;  // ← Consistent button width
+      border: 2px solid;
+      border-color: #ffffff #000000 #000000 #ffffff;
+      background: #c0c0c0;
+      color: #000000;  // ← Changed to black for better readability
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: normal;  // ← Changed to normal weight
+      box-sizing: border-box;
+
+      &:hover {
+        background: #d4d4d4;
+      }
+
+      &:active {
+        border-color: #000000 #ffffff #ffffff #000000;
+        padding: 5px 11px 3px 13px;
+      }
+
+      .social-icon {
+        width: 16px;
+        height: 16px;
+        display: block;
+        image-rendering: pixelated;  // ← Keeps icons crisp
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+      }
+    }
+  }
+}
+
+// Scrollbar styling for Windows 95 look
+.contact-container::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.contact-container::-webkit-scrollbar-track {
+  background: #c0c0c0;
+}
+
+.contact-container::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #000000 #000000 #ffffff;
+}
+
+.contact-container::-webkit-scrollbar-thumb:hover {
+  background: #d4d4d4;
+}
+
+.contact-container::-webkit-scrollbar-corner {
+  background: #c0c0c0;
+}

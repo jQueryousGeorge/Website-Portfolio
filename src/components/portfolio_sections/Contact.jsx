@@ -1,31 +1,9 @@
-/* import React from 'react';
-import './PortfolioSection.scss'; // Assuming shared SCSS file
-
-const Contact = () => {
-    return (
-        <div className="portfolio-section">
-            <h2>Contact Me</h2>
-            <p>How to get in touch:</p>
-            <ul>
-                <li>Email: your.email@example.com</li>
-                <li>LinkedIn: your-linkedin-profile</li>
-                <li>GitHub: your-github-profile</li>
-            </ul>
-        </div>
-    );
-};
-export default Contact; */
-
-// Contact.jsx updated version -- 1st backend approach
 import React, { useState } from 'react';
 import './Contact.scss';
+import githubIcon from '../../../src/assets/icons/icons8-github-16.png';
+import linkedinIcon from '../../../src/assets/icons/icons8-linkedin-16.png';
 
-// Custome styles for this section
-const h2StylesObject = {
-    marginBottom: "10px"
-}; 
-
-const Contact = () => { 
+const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -45,10 +23,12 @@ const Contact = () => {
     setStatus('sending');
 
     try {
-      const response = await fetch('/api/contact', {
+      // Replace YOUR_FORM_ID with your Formspree form ID
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify(formData),
       });
@@ -56,6 +36,7 @@ const Contact = () => {
       if (response.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus(''), 5000); // Clear success message after 5s
       } else {
         setStatus('error');
       }
@@ -65,24 +46,47 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-content">
-      <h2 style={ h2StylesObject }>Contact Me - Send me an E-Mail:</h2>
+    <div className="contact-container">
+      <div className="contact-header">
+        <h2>Contact Me - Send me an E-Mail:</h2>
+      </div>
 
-      
       {status === 'success' && (
-        <div className="win95-message success">
-          ✓ Message sent successfully!
+        <div className="alert-box success">
+          <div className="alert-icon">✓</div>
+          <div className="alert-content">
+            <strong>Success!</strong>
+            <p>Your message has been sent. I'll get back to you soon!</p>
+          </div>
+          <button 
+            className="alert-close" 
+            onClick={() => setStatus('')}
+            aria-label="Close"
+          >
+            ×
+          </button>
         </div>
       )}
-      
+
       {status === 'error' && (
-        <div className="win95-message error">
-          ✗ Failed to send message. Please try again.
+        <div className="alert-box error">
+          <div className="alert-icon">✗</div>
+          <div className="alert-content">
+            <strong>Error!</strong>
+            <p>Failed to send message. Please try again or contact me directly.</p>
+          </div>
+          <button 
+            className="alert-close" 
+            onClick={() => setStatus('')}
+            aria-label="Close"
+          >
+            ×
+          </button>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="contact-form">
-        <div className="form-group">
+        <div className="form-row">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -91,11 +95,12 @@ const Contact = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="win95-input"
+            disabled={status === 'sending'}
+            placeholder="Your Name"
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-row">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -104,11 +109,12 @@ const Contact = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="win95-input"
+            disabled={status === 'sending'}
+            placeholder="your.email@example.com"
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-row">
           <label htmlFor="message">Message:</label>
           <textarea
             id="message"
@@ -116,34 +122,51 @@ const Contact = () => {
             value={formData.message}
             onChange={handleChange}
             required
-            rows="5"
-            className="win95-textarea"
+            rows="6"
+            disabled={status === 'sending'}
+            placeholder="Type your message here..."
           />
         </div>
 
         <button 
           type="submit" 
-          className="win95-button"
+          className="win95-button primary"
           disabled={status === 'sending'}
         >
           {status === 'sending' ? 'Sending...' : 'Send Message'}
         </button>
       </form>
 
-      <div className="social-links">
-        <p>Or find me on:</p>
-        <ul>
-          <li>
-            <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-          </li>
-        </ul>
+      <div className="contact-footer">
+        <p className="footer-text">Or find me on:</p>
+        <div className="social-links">
+          <a 
+            href="https://linkedin.com/in/your-profile" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="social-link linkedin"
+          >
+            <img 
+                src={linkedinIcon}
+                alt="LinkedIn Social Platform Icon Image Placeholder for hyperlink"
+                className='social-icon'
+            />
+            LinkedIn
+          </a>
+          <a 
+            href="https://github.com/your-username" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="social-link github"
+          >
+            <img 
+                src={githubIcon} 
+                alt="GitHub Social Platform Icon Image Placeholder for hyperlink"
+                className='social-icon' 
+            />
+            GitHub
+          </a>
+        </div>
       </div>
     </div>
   );
