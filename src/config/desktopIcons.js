@@ -86,7 +86,7 @@ export const initialDesktopIcons = [
     },
     { 
         id: 'contact', 
-        label: 'Contact',
+        label: 'Contact Me',
         image: ICON_IMAGES.contact, 
         windowId: 'contactWindow', 
         contentType: 'component', 
