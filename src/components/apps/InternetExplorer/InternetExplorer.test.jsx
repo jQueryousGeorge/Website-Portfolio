@@ -17,5 +17,19 @@ describe('InternetExplorer security', () => {
         expect(iframe.src).toContain('google.com/webhp?igu=1');
         expect(iframe.src).not.toContain('javascript:');
     });
+
+    test ('Should block data: protocol(s)', () => {
+        render(<InternetExplorer />);
+        const input = screen.getByPlaceholderText('Type a web address');
+        const goButton = screen.getByText('Go');
+
+        // Test 2: input a data file into the URL bar
+        fireEvent.change(input, { target: { value: 'data:text/html, <h1>XSS</h1>' } });
+        fireEvent.click(goButton);
+
+        const iframe = screen.getByTitle('Internet Explorer');
+        expect(iframe.src).toContain('google.com');
+        expect(iframe.src).not.toContain('data:');
+    });
     
 });
