@@ -5,7 +5,7 @@ import InternetExplorer from './InternetExplorer';
 describe('InternetExplorer security', () => {
     test('should block javascript: protocol(s)', () => {
         render(<InternetExplorer />);
-        const input = screen.getAllByPlaceholderText('Type a web address...');
+        const input = screen.getByPlaceholderText('Type a web address');
         const goButton = screen.getByText('Go');
 
         // Test 1: put in a javascipt script as a URL
