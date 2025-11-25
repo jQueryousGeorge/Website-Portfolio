@@ -18,7 +18,7 @@ const InternetExplorer = () => {
         const trimmedInput = input.trim();
 
         // Need to block dangerous protocols!
-        if (/^javascript|data|vbscript|file):/i.test(trimmedInput)) {
+        if (/^(javascript|data|vbscript|file):/i.test(trimmedInput)) {
             return HOME_URL;
         }
         
