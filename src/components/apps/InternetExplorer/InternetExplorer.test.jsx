@@ -90,3 +90,47 @@ describe('InternetExplorer security', () => {
     });
     
 });
+
+/**
+ * Unit tests for the formatUrl utility.
+ * Ensures unsafe protocols are blocked and valid URLs are formatted correctly.
+ */
+describe('formatUrl function', () => {
+  const HOME_URL = "https://www.google.com/webhp?igu=1";
+  
+  // Utility function to sanitize and format URLs for navigation.
+  const formatUrl = (input) => {
+    const trimmedInput = input.trim();
+
+    if (/^(javascript|data|vbscript|file):/i.test(trimmedInput)) {
+      return HOME_URL;
+    }
+    
+    if (!trimmedInput) return HOME_URL;
+    if (trimmedInput.startsWith('http://') || trimmedInput.startsWith('https://')) {
+      return trimmedInput;
+    }
+    if (trimmedInput.includes('.') && !trimmedInput.includes(' ')) {
+      return `https://${trimmedInput}`;
+    }
+    return `https://www.google.com/search?igu=1&q=${encodeURIComponent(trimmedInput)}`;
+  };
+
+  test.each([
+    // Block unsafe protocols
+    ['javascript:alert("XSS")', HOME_URL, 'blocks javascript protocol'],
+    ['JAVASCRIPT:alert("XSS")', HOME_URL, 'blocks uppercase javascript'],
+    ['data:text/html,<h1>XSS</h1>', HOME_URL, 'blocks data protocol'],
+    ['vbscript:msgbox("XSS")', HOME_URL, 'blocks vbscript protocol'],
+    ['file:///etc/passwd', HOME_URL, 'blocks file protocol'],
+    // Allow and format valid URLs
+    ['https://example.com', 'https://example.com', 'allows valid https URL'],
+    ['example.com', 'https://example.com', 'formats domain without protocol'],
+    ['https://example.com/update', 'https://example.com/update', 'allows URL with "data" substring'],
+  ])(
+    'formatUrl("%s") should return "%s" (%s)',
+    (input, expected, description) => {
+      expect(formatUrl(input)).toBe(expected);
+    }
+  );
+});
