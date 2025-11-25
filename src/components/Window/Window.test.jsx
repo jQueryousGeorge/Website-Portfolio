@@ -1,66 +1,107 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Window from './Window';
 
+/**
+ * Unit tests for the Window component.
+ * Verifies rendering, state, and user interactions.
+ */
 describe('Window component', () => {
+  /**
+   * Renders the window title and children.
+   */
   test('renders title and children', () => {
     render(
       <Window title="Test Window">
         <div>Child Content</div>
       </Window>
     );
-
     expect(screen.getByText('Test Window')).toBeInTheDocument();
     expect(screen.getByText('Child Content')).toBeInTheDocument();
   });
 
+  /**
+   * Applies 'active' class when isActive is true.
+   */
   test('applies active class when isActive is true', () => {
     const { container } = render(<Window title="Active" isActive={true} />);
     const win = container.querySelector('.window');
     expect(win).toHaveClass('active');
   });
 
-  test('calls onClose when Close button clicked', () => {
+  /**
+   * Calls onClose when the Close button is clicked.
+   */
+  test('calls onClose when Close button clicked', async () => {
+    const user = userEvent.setup();
     const onClose = jest.fn();
     render(<Window title="Closable" onClose={onClose} />);
     const closeBtn = screen.getByLabelText('Close');
-    fireEvent.click(closeBtn);
+    await user.click(closeBtn);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  test('calls onMinimize when Minimize button clicked and hides when isMinimized', () => {
+  /**
+   * Calls onMinimize when the Minimize button is clicked.
+   * Window hides when minimized.
+   */
+  test('calls onMinimize when Minimize button clicked', async () => {
+    const user = userEvent.setup();
     const onMinimize = jest.fn();
     const { rerender, container } = render(
       <Window title="Minimizable" onMinimize={onMinimize} />
     );
     const minBtn = screen.getByLabelText('Minimize');
-    fireEvent.click(minBtn);
+    await user.click(minBtn);
     expect(onMinimize).toHaveBeenCalledTimes(1);
 
-    // Re-render with minimized state to assert style
+    // Re-render with minimized state
     rerender(<Window title="Minimizable" isMinimized={true} />);
     const win = container.querySelector('.window');
     expect(win).toHaveStyle({ display: 'none' });
   });
 
-  test('double-clicking title bar toggles maximize and restore', () => {
-    const { container } = render(<Window title="Maximizable" width={400} height={300} />);
+  /**
+   * Double-clicking the title bar toggles maximize and restore.
+   */
+  test('double-clicking title bar toggles maximize and restore', async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <Window title="Maximizable" width={400} height={300} />
+    );
     const titleBar = container.querySelector('.title-bar');
     const win = container.querySelector('.window');
 
     // Maximize
-    fireEvent.doubleClick(titleBar);
-    expect(win).toHaveStyle({ left: '0px', top: '0px', width: '100%', height: 'calc(100% - 30px)' });
+    await user.dblClick(titleBar);
+    expect(win).toHaveStyle({ 
+      left: '0px', 
+      top: '0px', 
+      width: '100%', 
+      height: 'calc(100% - 30px)' 
+    });
 
     // Restore
-    fireEvent.doubleClick(titleBar);
+    await user.dblClick(titleBar);
     expect(win).toHaveStyle({ width: '400px', height: '300px' });
   });
 
-  test('dragging the title bar moves the window and calls onFocus on click', () => {
+  /**
+   * Dragging the title bar moves the window.
+   * Also tests window focus on click.
+   */
+  test('dragging the title bar moves the window', async () => {
+    const user = userEvent.setup();
     const onFocus = jest.fn();
     const { container } = render(
-      <Window title="Draggable" onFocus={onFocus} defaultPosition={{ x: 100, y: 100 }} width={400} height={300} />
+      <Window 
+        title="Draggable" 
+        onFocus={onFocus} 
+        defaultPosition={{ x: 100, y: 100 }} 
+        width={400} 
+        height={300} 
+      />
     );
 
     const win = container.querySelector('.window');
@@ -79,18 +120,17 @@ describe('Window component', () => {
         height: 300,
         x: 100,
         y: 100,
-        toJSON: () => {}
       }),
       configurable: true
     });
 
     // Focus via click
-    fireEvent.click(win);
+    await user.click(win);
     expect(onFocus).toHaveBeenCalledTimes(1);
 
-    // Start drag with left mouse button at 150,150 (offset 50,50 from rect)
+    // Simulate drag
+    const { fireEvent } = await import('@testing-library/react');
     fireEvent.mouseDown(titleBar, { button: 0, clientX: 150, clientY: 150 });
-    // Move to 400,300 => expected left/top ~ (350,250)
     fireEvent.mouseMove(document, { clientX: 400, clientY: 300 });
     fireEvent.mouseUp(document);
 
