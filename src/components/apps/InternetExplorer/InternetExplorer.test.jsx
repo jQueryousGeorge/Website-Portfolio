@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { renderWithUser } from '../../../test-utils';
 import userEvent from '@testing-library/user-event';
 import InternetExplorer from './InternetExplorer';
 
@@ -12,21 +13,41 @@ describe('InternetExplorer security', () => {
    * Blocks 'javascript:' protocol to prevent XSS.
    * Should redirect to HOME_URL if attempted.
    */
-  test('should block javascript: protocol(s)', async () => {
-    const user = userEvent.setup();
-    render(<InternetExplorer />);
-    
-    const input = screen.getByPlaceholderText('Type a web address');
-    const goButton = screen.getByText('Go');
+  /* test('should block javascript: protocol(s)', async () => {
+        const user = userEvent.setup();
+        render(<InternetExplorer />);
+        
+        const input = screen.getByPlaceholderText('Type a web address');
+        const goButton = screen.getByText('Go');
 
-    await user.clear(input);
-    await user.type(input, 'javascript:alert("XSS")');
-    await user.click(goButton);
+        await user.clear(input);
+        await user.type(input, 'javascript:alert("XSS")');
+        await user.click(goButton);
 
-    const iframe = screen.getByTitle('Internet Explorer');
-    expect(iframe.src).toContain('google.com/webhp?igu=1');
-    expect(iframe.src).not.toContain('javascript:');
-  });
+        const iframe = screen.getByTitle('Internet Explorer');
+        expect(iframe.src).toContain('google.com/webhp?igu=1');
+        expect(iframe.src).not.toContain('javascript:');
+    }); */
+
+    // I am writing a different approach, using `src\test-utils.jsx`
+    // for the test above.... -> 
+    test('should block javascript: protocol(s)', async () => {
+        // Get user automatically from renderWithUser
+        const { user } = renderWithUser(<InternetExplorer />);
+        
+        const input = screen.getByPlaceholderText('Type a web address');
+        const goButton = screen.getByText('Go');
+
+        // Clear the input first, then type the malicious URL
+        await user.clear(input);
+        await user.type(input, 'javascript:alert("XSS")');
+        await user.click(goButton);
+
+        // Verify the iframe was redirected to the safe HOME_URL
+        const iframe = screen.getByTitle('Internet Explorer');
+        expect(iframe.src).toContain('google.com/webhp?igu=1');
+        expect(iframe.src).not.toContain('javascript:');
+    });
 
   /**
    * Blocks 'data:' protocol to prevent injection of arbitrary data.

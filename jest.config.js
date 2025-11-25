@@ -15,6 +15,10 @@ module.exports = {
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|svg|ico)$': '<rootDir>/__mocks__/fileMock.js',
+    // Adding path aliases below ->
+    '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^@config/(.*)$': '<rootDir>/src/config/$1',
   },
   
   // Don't transform node_modules except for specific packages
