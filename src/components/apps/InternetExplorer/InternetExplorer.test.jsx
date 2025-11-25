@@ -27,6 +27,8 @@ describe('InternetExplorer security', () => {
         fireEvent.change(input, { target: { value: 'data:text/html, <h1>XSS</h1>' } });
         fireEvent.click(goButton);
 
+        // Test 2 should reject the inserted data as input and resort to returning
+        // the `HOME_URL` instead
         const iframe = screen.getByTitle('Internet Explorer');
         expect(iframe.src).toContain('google.com');
         expect(iframe.src).not.toContain('data:');
