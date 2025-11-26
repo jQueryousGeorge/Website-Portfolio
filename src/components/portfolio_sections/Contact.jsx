@@ -7,7 +7,7 @@ const INITIAL_FORM_DATA = {
   name: '',
   email: '',
   message: '',
-  company: '' // honeypot field
+  company: ''
 };
 
 const CONSTRAINTS = {
@@ -86,7 +86,6 @@ const Contact = () => {
     setStatus('sending');
 
     try {
-      // Replace YOUR_FORM_ID with your Formspree form ID
       const response = await fetch('https://formspree.io/f/xyzapnrj', {
         method: 'POST',
         headers: {
