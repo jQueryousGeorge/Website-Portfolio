@@ -111,3 +111,4 @@ Website-Portfolio/
 ## Current status notes
 - Core Windows-95 UX framework is implemented and functional.
 - Some portfolio content is still placeholder text and sample links, so this is best described as a themed portfolio framework with working interaction patterns and extensible app/window infrastructure.
+- Need to review the entire project for any security issues. Have implemented contact form anti-bot features, max_window protection, but these are only few. Need to review the entire project IN-DEPTH.
