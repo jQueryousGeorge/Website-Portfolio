@@ -23,7 +23,7 @@ const MinesweeperInfo = () => {
                 <a
                     href={STORE_URL}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="win95-button"
                 >
                     Open in Microsoft Store

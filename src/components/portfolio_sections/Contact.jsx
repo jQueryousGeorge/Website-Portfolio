@@ -86,7 +86,8 @@ const Contact = () => {
     setStatus('sending');
 
     try {
-      const response = await fetch('https://formspree.io/f/xyzapnrj', {
+      const FORMSPREE_URL = process.env.REACT_APP_FORMSPREE_ENDPOINT;
+      const response = await fetch(FORMSPREE_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
